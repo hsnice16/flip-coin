@@ -1,0 +1,7 @@
+.button {
+  background-color: var(--primary-color);
+  border-radius: 10px;
+  border: none;
+  color: var(--primary-fill-color);
+  display: inline-block;
+}

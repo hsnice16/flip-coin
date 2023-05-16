@@ -1,0 +1,9 @@
+.main-hero__image {
+  display: block;
+  margin: auto;
+}
+
+h1 {
+  color: var(--primary-fill-color);
+  font-family: Mitr;
+}

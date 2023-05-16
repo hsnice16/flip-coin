@@ -1,0 +1,20 @@
+.header-container {
+  align-items: center;
+  display: flex;
+}
+
+.header-button__container {
+  justify-content: flex-end;
+  align-items: center;
+  display: flex;
+  flex: 1;
+}
+
+.header-button__container .button-connect__wallet {
+  font-size: 1.55rem;
+  font-family: inherit;
+  font-weight: normal;
+  padding: 1rem 1.5rem;
+  border: thin solid var(--color-overlay);
+}
+

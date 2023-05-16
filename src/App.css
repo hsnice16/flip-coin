@@ -1,38 +1,35 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;400;500;600;700&display=swap");
+
+:root {
+  --background-color: rgb(23, 0, 52);
+  --color-overlay: rgba(255, 255, 255, 0.1);
+  --primary-color: #7551ff;
+  --primary-fill-color: white;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+body {
+  background-color: var(--background-color);
+  margin: 0px;
+  font-family: Formular, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  font-size: 1.6rem;
+}
+
+@media screen and (max-width: 1440px) {
+  .header-container {
+    margin: 2.5rem auto;
+    max-width: 1220px;
   }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+  .main-container {
+    margin: 5.25rem auto;
+    max-width: 1220px;
   }
 }
