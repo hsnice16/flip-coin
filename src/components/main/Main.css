@@ -1,9 +1,95 @@
+.main-container {
+  font-family: Mitr;
+  margin: 5.25rem auto;
+  max-width: 118rem;
+}
+
 .main-hero__image {
   display: block;
   margin: auto;
 }
 
-h1 {
+.main-play__steps {
+  position: relative;
+}
+
+.main-play__steps h1 {
   color: var(--primary-fill-color);
-  font-family: Mitr;
+  text-align: center;
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  top: -9.25rem;
+  font-weight: 600;
+  font-size: 5.5rem;
+}
+
+.play-steps__container {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(7.5px);
+  border-left: 6px solid rgb(117, 81, 255);
+  border-right: 6px solid rgb(117, 81, 255);
+  display: flex;
+  align-items: flex-start;
+  gap: 5rem;
+  padding: 2rem 8.75rem 0;
+  margin: 6rem auto 0;
+}
+
+.play-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 20rem;
+}
+
+.play-step:is(.one, .four) {
+  max-width: 12.5rem;
+}
+
+.play-step span {
+  color: var(--primary-fill-color);
+  position: relative;
+  font-size: 2.25rem;
+}
+
+.play-step .step-num__svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+.play-step p {
+  color: rgb(213, 184, 249);
+  display: inline-block;
+  font-size: 1.75rem;
+  text-align: center;
+  margin-top: 0;
+}
+
+.bet-input__container {
+  display: flex;
+  align-items: center;
+  margin-top: 6rem;
+  margin-bottom: 6rem;
+  gap: 5.5rem;
+}
+
+@media screen and (max-width: 640px) {
+  .main-play__steps h1 {
+    font-size: 3rem;
+    top: -4.75rem;
+  }
+
+  .play-steps__container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .bet-input__container {
+    flex-direction: column-reverse;
+  }
 }

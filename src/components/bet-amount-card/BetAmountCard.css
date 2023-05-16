@@ -1,0 +1,125 @@
+.bet-amount__card {
+  background: rgb(52, 37, 71);
+  max-width: 38rem;
+  border-radius: 2rem;
+  padding: 2.75rem 3.75rem 2.74rem;
+}
+
+.amount-card__labels {
+  display: flex;
+  flex-direction: column;
+  gap: 3.25rem;
+}
+
+.amount-card__labels :is(h2, h3, label) {
+  margin: 0;
+  font-weight: normal;
+  font-size: 1.75rem;
+}
+
+.amount-card__labels h2 {
+  color: var(--primary-fill-color);
+}
+
+.amount-card__labels :is(h3, label),
+.profit-amount__container .bruh-text {
+  color: var(--form-label-color);
+}
+
+.amount-card__input {
+  background: rgba(33, 18, 51, 0.7);
+  border: thin solid rgb(59, 45, 77);
+  border-radius: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem 2rem;
+}
+
+.amount-card__input input {
+  flex: 1;
+  border: none;
+  background-color: transparent;
+  font-weight: normal;
+  font-size: 1.8rem;
+  color: var(--primary-fill-color);
+}
+
+.amount-card__input input:focus-visible {
+  outline: none;
+}
+
+.amount-card__input button {
+  cursor: pointer;
+  font-family: Mitr;
+  font-size: 1.5rem;
+  font-weight: normal;
+  color: rgb(117, 81, 255);
+  border: none;
+  background-color: transparent;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin: 4rem 0 2.25rem;
+}
+
+.divider > div {
+  background: rgba(217, 217, 217, 0.1);
+  height: 1px;
+  flex: 1;
+}
+
+.divider > span {
+  background: rgb(117, 81, 255);
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+
+.profit-amount__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--primary-fill-color);
+  font-size: 1.5rem;
+  margin-bottom: 5rem;
+  gap: 1rem;
+}
+
+.profit-amount__container > div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.profit-amount__container .profit-amount {
+  display: inline-block;
+  max-width: 30rem;
+  overflow: hidden;
+}
+
+.btn-approve {
+  width: 100%;
+  padding: 1.25rem 1.5rem;
+  font-size: 1.65rem;
+}
+
+@media screen and (max-width: 640px) {
+  .bet-amount__card {
+    width: 100%;
+    max-width: 100%;
+    margin: auto;
+  }
+
+  .amount-card__input input {
+    max-width: 73.5%;
+  }
+
+  .profit-amount__container .profit-amount {
+    max-width: 15rem;
+  }
+}

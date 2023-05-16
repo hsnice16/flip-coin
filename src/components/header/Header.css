@@ -1,6 +1,8 @@
 .header-container {
   align-items: center;
   display: flex;
+  margin: 2.5rem auto;
+  max-width: 122rem;
 }
 
 .header-button__container {
@@ -11,10 +13,12 @@
 }
 
 .header-button__container .button-connect__wallet {
-  font-size: 1.55rem;
-  font-family: inherit;
-  font-weight: normal;
-  padding: 1rem 1.5rem;
+  padding: 0.75rem 1.25rem;
   border: thin solid var(--color-overlay);
+  font-size: 1.55rem;
+  transition: background-color 0.2s;
 }
 
+.header-button__container .button-connect__wallet:hover {
+  background-color: #8464ff;
+}

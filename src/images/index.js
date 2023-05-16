@@ -1,2 +1,10 @@
 export * from "./HeroImage";
 export * from "./Logo";
+export * from "./StepNumBg";
+export { default as BearCoin } from "./bear-coin.png";
+export { default as Bricks } from "./bricks.png";
+export { default as BruhChooseCoin } from "./bruh-choose-coin.png";
+export { default as EmptyCoin } from "./empty-coin.webp";
+export { default as PawCoin } from "./paw-coin.png";
+export * from "./LeftCurly";
+export * from "./RightCurly";

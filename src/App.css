@@ -3,8 +3,13 @@
 :root {
   --background-color: rgb(23, 0, 52);
   --color-overlay: rgba(255, 255, 255, 0.1);
+  --form-label-color: rgb(140, 126, 159);
   --primary-color: #7551ff;
   --primary-fill-color: white;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 html {
@@ -22,14 +27,8 @@ body {
   font-size: 1.6rem;
 }
 
-@media screen and (max-width: 1440px) {
-  .header-container {
-    margin: 2.5rem auto;
-    max-width: 1220px;
-  }
-
-  .main-container {
-    margin: 5.25rem auto;
-    max-width: 1220px;
+@media screen and (max-width: 640px) {
+  body {
+    margin: -0.5rem 2rem 2rem;
   }
 }

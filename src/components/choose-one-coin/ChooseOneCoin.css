@@ -1,0 +1,116 @@
+.choose-coin__card {
+  flex: 1;
+  background: rgb(52, 37, 71);
+  padding: 2.75rem;
+  border-radius: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.choose-coin__card > div {
+  background-image: url("../../images/bricks.png");
+  border: thin solid var(--primary-fill-color);
+  border-radius: 2rem;
+  background-color: var(--primary-color);
+  padding: 2rem 5.25rem;
+}
+
+.choose-coin__heading {
+  color: var(--primary-fill-color);
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 400;
+  margin: 0;
+}
+
+.coin-option__container {
+  display: flex;
+  align-items: center;
+  gap: 10rem;
+}
+
+.coin-option__container > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.coin-option__container button {
+  border-radius: 50%;
+  background-color: transparent;
+  border: thin solid;
+  border-color: transparent;
+  display: flex;
+  width: 10.75rem;
+  height: 10.75rem;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.coin-option__container button > img {
+  width: 10.75rem;
+  height: 10.75rem;
+}
+
+.coin-option__container button.active {
+  border-color: var(--primary-fill-color);
+}
+
+.coin-option__container span {
+  font-size: 2.25rem;
+}
+
+.empty-coin__img {
+  width: 17.25rem;
+  height: 17.25rem;
+}
+
+.choose-coin__img {
+  position: absolute;
+  z-index: 1;
+  right: -6rem;
+  width: 32rem;
+  height: 30rem;
+  bottom: -2.75rem;
+}
+
+@media screen and (max-width: 640px) {
+  .choose-coin__card {
+    width: 100%;
+    margin: auto;
+  }
+
+  .choose-coin__card > div {
+    padding: 4rem 2.25rem 11rem;
+  }
+
+  .choose-coin__heading {
+    font-size: 2.75rem;
+  }
+
+  .choose-coin__heading .curly {
+    display: none;
+  }
+
+  .coin-option__container {
+    flex-direction: column;
+    gap: 3.5rem;
+  }
+
+  .coin-option__container > div {
+    flex-direction: row;
+  }
+
+  .coin-option__container button,
+  .coin-option__container button > img {
+    width: 8.75rem;
+    height: 8.75rem;
+  }
+
+  .choose-coin__img {
+    bottom: -10rem;
+    right: -6.25rem;
+  }
+}
