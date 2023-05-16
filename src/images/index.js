@@ -8,3 +8,4 @@ export { default as EmptyCoin } from "./empty-coin.webp";
 export { default as PawCoin } from "./paw-coin.png";
 export * from "./LeftCurly";
 export * from "./RightCurly";
+export * from "./EmptyHistory";

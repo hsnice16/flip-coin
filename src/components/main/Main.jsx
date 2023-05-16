@@ -1,6 +1,6 @@
 import { HeroImage, StepNumBg } from "../../images";
 import "./Main.css";
-import { BetAmountCard, ChooseOneCoin } from "../index";
+import { BetAmountCard, ChooseOneCoin, BetHistory } from "../index";
 
 const HowToPlayElement = (
   <div className="main-play__steps">
@@ -59,6 +59,8 @@ export function Main() {
         <BetAmountCard />
         <ChooseOneCoin />
       </div>
+
+      <BetHistory />
     </main>
   );
 }

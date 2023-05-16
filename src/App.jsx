@@ -1,3 +1,4 @@
+import "@rainbow-me/rainbowkit/styles.css";
 import "./App.css";
 import { Header, Main } from "./components";
 

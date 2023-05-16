@@ -12,13 +12,22 @@
   flex: 1;
 }
 
-.header-button__container .button-connect__wallet {
+.header-button__container [data-testid="rk-connect-button"] {
   padding: 0.75rem 1.25rem;
   border: thin solid var(--color-overlay);
   font-size: 1.55rem;
   transition: background-color 0.2s;
+  border-radius: 10px;
+  font-family: Mitr;
+  font-weight: normal;
 }
 
-.header-button__container .button-connect__wallet:hover {
+.header-button__container
+  [data-testid="rk-connect-button"]:is(::before, ::after) {
+  display: none;
+}
+
+.header-button__container [data-testid="rk-connect-button"]:hover {
   background-color: #8464ff;
+  transform: scale(1);
 }

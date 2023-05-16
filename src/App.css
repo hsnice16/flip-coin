@@ -6,6 +6,8 @@
   --form-label-color: rgb(140, 126, 159);
   --primary-color: #7551ff;
   --primary-fill-color: white;
+  --loss-color: #ef4444;
+  --win-color: #22c55d;
 }
 
 * {

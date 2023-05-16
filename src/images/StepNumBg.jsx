@@ -11,7 +11,7 @@ export function StepNumBg(props) {
       <path
         d="M1 3.29449C5.08696 3.29449 8.9101 1.45084 12.4094 1.06945C21.1193 0.120171 26.7989 9.1749 34.625 11.334C39.7651 12.752 44.1685 11.9562 48 8.45973"
         stroke="url(#paint0_linear_178_755)"
-        stroke-linecap="round"
+        strokeLinecap="round"
       ></path>
       <defs>
         <linearGradient
@@ -22,9 +22,9 @@ export function StepNumBg(props) {
           y2="13.2228"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#7551FF" stop-opacity="0"></stop>
-          <stop offset="0.510422" stop-color="#7551FF"></stop>
-          <stop offset="1" stop-color="#7551FF" stop-opacity="0"></stop>
+          <stop stopColor="#7551FF" stopOpacity="0"></stop>
+          <stop offset="0.510422" stopColor="#7551FF"></stop>
+          <stop offset="1" stopColor="#7551FF" stopOpacity="0"></stop>
         </linearGradient>
       </defs>
     </svg>

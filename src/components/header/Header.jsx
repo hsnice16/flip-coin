@@ -1,13 +1,13 @@
 import { Logo } from "../../images";
-import { Button } from "../index";
 import "./Header.css";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 export function Header() {
   return (
     <header className="header-container">
       <Logo />
       <div className="header-button__container">
-        <Button className="button-connect__wallet">Connect Wallet</Button>
+        <ConnectButton chainStatus="icon" />
       </div>
     </header>
   );
