@@ -1,5 +1,5 @@
-import { useAccount, useContractRead, erc20ABI } from "wagmi";
-import { ERC_20_CONTRACT, COIN_FLIP_CONTRACT } from "../utils";
+import { useAccount, useContractRead } from "wagmi";
+import { ERC_20_CONTRACT, COIN_FLIP_CONTRACT, erc20ABI } from "../utils";
 
 export function useAllowance() {
   const { address } = useAccount();

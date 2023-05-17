@@ -1,5 +1,5 @@
-import { useAccount, useContractRead, erc20ABI } from "wagmi";
-import { ERC_20_CONTRACT } from "../utils";
+import { useAccount, useContractRead } from "wagmi";
+import { ERC_20_CONTRACT, erc20ABI } from "../utils";
 
 export function useUserMortyBalance() {
   const { address } = useAccount();
