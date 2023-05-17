@@ -23,7 +23,7 @@ export function BetAmountCard({ isTail }) {
 
   const { approveWrite, approveWriteLoading, approveWriteSuccess } =
     useApproveWrite(
-      (Number(enteredAmount) - formatEther(allowance)) * 10 ** 18
+      (Number(enteredAmount) - formatEther(allowance ?? 0)) * 10 ** 18
     );
   const { flipWrite, flipWriteLoading, flipWriteReturn, flipWriteSuccess } =
     useFlipWrite(Number(enteredAmount) * 10 ** 18, isTail);
@@ -88,8 +88,8 @@ export function BetAmountCard({ isTail }) {
     error && setError("");
 
     const maxValue = Math.max(
-      formatEther(maxBet),
-      formatEther(userMortyBalance)
+      formatEther(maxBet ?? 0),
+      formatEther(userMortyBalance ?? 0)
     );
     setEnteredAmount(maxValue);
   };
