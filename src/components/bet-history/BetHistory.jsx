@@ -2,16 +2,16 @@ import "./BetHistory.css";
 import { sliceAddress } from "../../utils";
 import { EmptyHistory } from "../../images";
 
-const history = [];
+// const history = [];
 
-// const history = new Array(35).fill({
-//   time: "5 minutes ago",
-//   player: "0x49EFeE36a95f783165A240E7205FF01d9577f79E",
-//   wager: "0.75",
-//   choice: "Tails",
-//   streak: "2 loss",
-//   profit: "-0.75",
-// });
+const history = new Array(35).fill({
+  time: "5 minutes ago",
+  player: "0x49EFeE36a95f783165A240E7205FF01d9577f79E",
+  wager: "0.75",
+  choice: "Tails",
+  streak: "2 loss",
+  profit: "-0.75",
+});
 
 export function BetHistory() {
   return (

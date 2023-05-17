@@ -102,6 +102,14 @@
   overflow: hidden;
 }
 
+.error-text {
+  color: var(--loss-color);
+  margin-left: 0.25rem;
+  margin-bottom: 0.25rem;
+  display: inline-block;
+  min-height: 0.75rem;
+}
+
 .btn-approve {
   width: 100%;
   padding: 1.25rem 1.5rem;

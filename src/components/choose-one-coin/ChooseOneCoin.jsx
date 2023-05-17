@@ -7,11 +7,8 @@ import {
   BearCoin,
   PawCoin,
 } from "../../images";
-import { useState } from "react";
 
-export function ChooseOneCoin() {
-  const [selectedCoin, setSelectedCoin] = useState("bear");
-
+export function ChooseOneCoin({ selectedCoin, setSelectedCoin }) {
   return (
     <div className="choose-coin__card">
       <div>
