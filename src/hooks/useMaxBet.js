@@ -7,7 +7,7 @@ export function useMaxBet() {
     abi: coinFlipABI,
     functionName: "maxBet",
   });
-  isError && console.log("contract-read-error-maxBet", error);
+  // isError && console.log("contract-read-error-maxBet", error);
 
   return isSuccess ? data : undefined;
 }

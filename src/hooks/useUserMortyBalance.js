@@ -10,7 +10,7 @@ export function useUserMortyBalance() {
     functionName: "balanceOf",
     args: [address],
   });
-  isError && console.log("contract-read-error-for-balanceOf", error);
+  // isError && console.log("contract-read-error-for-balanceOf", error);
 
   return isSuccess ? data : undefined;
 }

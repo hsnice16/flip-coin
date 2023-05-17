@@ -10,7 +10,7 @@ export function useApproveWrite(amount) {
   });
   const { isLoading, isSuccess, isError, error, write } =
     useContractWrite(config);
-  isError && console.log("contract-write-error-for-approve", error);
+  // isError && console.log("contract-write-error-for-approve", error);
 
   return {
     approveWriteLoading: isLoading,
