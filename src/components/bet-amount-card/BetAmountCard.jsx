@@ -10,12 +10,14 @@ import {
   useFlipWrite,
   useListenFlipCompletedEvent,
 } from "../../hooks";
+import { useAccount } from "wagmi";
 
 export function BetAmountCard({ isTail }) {
   const [error, setError] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
   const [showBetText, setShowBetText] = useState(false);
 
+  const { address } = useAccount();
   const { allowance, isLoadingAllowance } = useAllowance();
   const userMortyBalance = useUserMortyBalance();
   const maxBet = useMaxBet();
@@ -156,7 +158,7 @@ export function BetAmountCard({ isTail }) {
       <Button
         className="btn-approve"
         onClick={approveBtnText === "Bet" ? handleBetClick : handleApproveClick}
-        disabled={approveBtnText === "Waiting..."}
+        disabled={approveBtnText === "Waiting..." || !address}
       >
         {approveBtnText}
       </Button>
