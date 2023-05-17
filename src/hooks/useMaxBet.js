@@ -2,7 +2,7 @@ import { useContractRead } from "wagmi";
 import { COIN_FLIP_CONTRACT, coinFlipABI } from "../utils";
 
 export function useMaxBet() {
-  const { data, error, isError, isSuccess } = useContractRead({
+  const { data, isSuccess } = useContractRead({
     address: COIN_FLIP_CONTRACT,
     abi: coinFlipABI,
     functionName: "maxBet",

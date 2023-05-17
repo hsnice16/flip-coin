@@ -4,7 +4,7 @@ import { ERC_20_CONTRACT } from "../utils";
 export function useUserMortyBalance() {
   const { address } = useAccount();
 
-  const { data, error, isError, isSuccess } = useContractRead({
+  const { data, isSuccess } = useContractRead({
     address: ERC_20_CONTRACT,
     abi: erc20ABI,
     functionName: "balanceOf",
