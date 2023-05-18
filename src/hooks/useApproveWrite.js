@@ -25,7 +25,11 @@ export function useApproveWrite(amount) {
       }));
 
       const contract = new Contract(ERC_20_CONTRACT, erc20ABI, signer);
-      await contract.approve(COIN_FLIP_CONTRACT, utils.parseEther(amount));
+      const tx = await contract.approve(
+        COIN_FLIP_CONTRACT,
+        utils.parseEther(amount)
+      );
+      await tx.wait();
 
       setStates((prevValue) => ({
         ...prevValue,

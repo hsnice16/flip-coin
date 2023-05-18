@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Contract, utils } from "ethers";
 
 export function useFlipWrite() {
-  const signer = useSigner();
+  const { data: signer } = useSigner();
 
   const [states, setStates] = useState({
     isError: false,
