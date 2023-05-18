@@ -1,6 +1,13 @@
 import { Button } from "../index";
 import "./BetAmountCard.css";
-import { isValidInputValue, COIN, MINIMUM_BET, formatEther } from "../../utils";
+import {
+  isValidInputValue,
+  COIN,
+  MINIMUM_BET,
+  formatEther,
+  FLIP_COMPLETED_INITIAL_VALUE,
+  NEW_FLIP_INITIAL_VALUE,
+} from "../../utils";
 import {
   useAllowance,
   useUserMortyBalance,
@@ -8,11 +15,12 @@ import {
   useApproveWrite,
   useFlipWrite,
   useListenFlipCompletedEvent,
+  useListenNewFlipEvent,
 } from "../../hooks";
 import { useAccount } from "wagmi";
 import { useMemo, useState, useEffect } from "react";
 
-export function BetAmountCard({ isTail }) {
+export function BetAmountCard({ isTail, didWin, setDidWin, setSelectedCoin }) {
   const [error, setError] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
   const [showBetText, setShowBetText] = useState(false);
@@ -21,25 +29,31 @@ export function BetAmountCard({ isTail }) {
   const { allowance, isLoadingAllowance } = useAllowance();
   const userMortyBalance = useUserMortyBalance();
   const maxBet = useMaxBet();
-  const [startListeningEvent, setStartListeningEvent] = useState(false);
+
+  const [flipCompleted, setFlipCompleted] = useState(
+    FLIP_COMPLETED_INITIAL_VALUE
+  );
+  const [newFlip, setNewFlip] = useState(NEW_FLIP_INITIAL_VALUE);
 
   const { approveWrite, approveWriteLoading, approveWriteSuccess } =
     useApproveWrite(
       (Number(enteredAmount) - formatEther(allowance ?? 0)) * 10 ** 18
     );
-  const { flipWrite, flipWriteLoading, flipWriteReturn, flipWriteSuccess } =
-    useFlipWrite();
+  const { flipWrite, flipWriteLoading, flipWriteSuccess } = useFlipWrite();
 
   const formattedProfitAmount = useMemo(() => {
     return Number((Number(enteredAmount) * 2).toFixed(0)).toLocaleString();
   }, [enteredAmount]);
 
   const approveBtnText = useMemo(() => {
+    if (newFlip.listening && flipCompleted.listening) return "Listening...";
+
     if (
       isLoadingAllowance ||
       approveWriteLoading ||
       flipWriteLoading ||
-      startListeningEvent
+      flipCompleted.listening ||
+      newFlip.listening
     )
       return "Waiting...";
 
@@ -52,28 +66,29 @@ export function BetAmountCard({ isTail }) {
     approveWriteSuccess,
     showBetText,
     flipWriteLoading,
-    startListeningEvent,
+    flipCompleted.listening,
+    newFlip.listening,
   ]);
 
-  const flipCompletedListener = (log) => {
-    setStartListeningEvent(false);
-    setShowBetText(false);
-    console.log("flipCompletedLog", log);
-    console.log("flipWriteReturn", flipWriteReturn);
-  };
-
-  const unsubscribe = useListenFlipCompletedEvent(flipCompletedListener);
-  useEffect(() => {
-    return () => unsubscribe && unsubscribe();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  useListenFlipCompletedEvent(setFlipCompleted);
+  useListenNewFlipEvent(setNewFlip);
 
   useEffect(() => {
     if (flipWriteSuccess && !flipWriteLoading) {
-      setStartListeningEvent(true);
+      setFlipCompleted((prevValue) => ({ ...prevValue, listening: true }));
+      setNewFlip((prevValue) => ({ ...prevValue, listening: true }));
     }
   }, [flipWriteSuccess, flipWriteLoading]);
+
+  useEffect(() => {
+    if (newFlip.gameId && flipCompleted.gameId) {
+      if (Number(newFlip.gameId) === Number(flipCompleted.gameId)) {
+        setDidWin(flipCompleted.didWin);
+      }
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [newFlip.gameId, flipCompleted.gameId]);
 
   const handleInputChange = (event) => {
     const value = event.target.value;
@@ -124,11 +139,29 @@ export function BetAmountCard({ isTail }) {
     await flipWrite(enteredAmount, isTail);
   };
 
+  const handleNewBetClick = () => {
+    setShowBetText(false);
+    setDidWin(null);
+    setNewFlip(NEW_FLIP_INITIAL_VALUE);
+    setFlipCompleted(FLIP_COMPLETED_INITIAL_VALUE);
+    setSelectedCoin("head");
+  };
+
   return (
     <form
       className="bet-amount__card"
       onSubmit={(event) => event.preventDefault()}
     >
+      <div className={`didWin-container ${didWin === null ? "hide" : ""}`}>
+        <div className={`didWin-text__container ${didWin ? "win" : ""}`}>
+          <h2>You {didWin ? "Win" : "Loss"}</h2>
+          {didWin && <h3>You will get the reward in your wallet</h3>}
+        </div>
+        <Button className="btn-approve" onClick={handleNewBetClick}>
+          New Bet
+        </Button>
+      </div>
+
       <div className="amount-card__labels">
         <h2>{COIN} Bet</h2>
         <h3>Min bet: 100 000 000 {COIN}</h3>

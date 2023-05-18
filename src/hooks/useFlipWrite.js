@@ -11,10 +11,9 @@ export function useFlipWrite() {
     error: "",
     isSuccess: false,
     isLoading: false,
-    data: "",
   });
 
-  const { isError, isSuccess, isLoading, error, data } = states;
+  const { isError, isSuccess, isLoading, error } = states;
 
   const flipWrite = async (amount, isTail) => {
     try {
@@ -26,13 +25,13 @@ export function useFlipWrite() {
       }));
 
       const contract = new Contract(COIN_FLIP_CONTRACT, coinFlipABI, signer);
-      const data = await contract.flip(utils.parseEther(amount), isTail);
+      const tx = await contract.flip(utils.parseEther(amount), isTail);
+      await tx.wait();
 
       setStates((prevValue) => ({
         ...prevValue,
         isLoading: false,
         isSuccess: true,
-        data,
       }));
     } catch (error) {
       setStates((prevValue) => ({
@@ -46,7 +45,6 @@ export function useFlipWrite() {
 
   isError && console.log("contract-write-error-for-flip", error);
   return {
-    flipWriteReturn: data,
     flipWriteLoading: isLoading,
     flipWrite,
     flipWriteSuccess: isSuccess,

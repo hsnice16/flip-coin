@@ -4,3 +4,5 @@ export * from "./useUserMortyBalance";
 export * from "./useApproveWrite";
 export * from "./useFlipWrite";
 export * from "./useListenFlipCompletedEvent";
+export * from "./useGetHistory";
+export * from "./useListenNewFlipEvent";

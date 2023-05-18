@@ -1,7 +1,27 @@
 import "./ChooseOneCoin.css";
-import { LeftCurly, RightCurly, ChooseCoin, EmptyCoin } from "../../images";
+import {
+  LeftCurly,
+  RightCurly,
+  ChooseCoin,
+  EmptyCoin,
+  Head,
+  Tail,
+} from "../../images";
+import { useMemo } from "react";
 
-export function ChooseOneCoin({ selectedCoin, setSelectedCoin }) {
+export function ChooseOneCoin({ selectedCoin, setSelectedCoin, didWin }) {
+  const emptyCoinSrc = useMemo(() => {
+    if (didWin && selectedCoin === "head") return Head;
+
+    if (didWin && selectedCoin === "tail") return Tail;
+
+    if (didWin === false && selectedCoin === "head") return Tail;
+
+    if (didWin === false && selectedCoin === "tail") return Head;
+
+    return EmptyCoin;
+  }, [didWin, selectedCoin]);
+
   return (
     <div className="choose-coin__card">
       <div>
@@ -15,21 +35,25 @@ export function ChooseOneCoin({ selectedCoin, setSelectedCoin }) {
           <div>
             <button
               className={selectedCoin === "head" ? "active" : ""}
-              onClick={() => setSelectedCoin("head")}
+              onClick={
+                didWin === null ? () => setSelectedCoin("head") : () => {}
+              }
             >
               <div className="head-coin" />
             </button>
             <span>or</span>
             <button
               className={selectedCoin === "tail" ? "active" : ""}
-              onClick={() => setSelectedCoin("tail")}
+              onClick={
+                didWin === null ? () => setSelectedCoin("tail") : () => {}
+              }
             >
               <div className="tail-coin" />
             </button>
           </div>
           <img
             className="empty-coin__img"
-            src={EmptyCoin}
+            src={emptyCoinSrc}
             alt="no coin selected"
           />
         </div>

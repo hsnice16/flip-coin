@@ -8,3 +8,8 @@
   font-weight: normal;
   cursor: pointer;
 }
+
+.button:disabled {
+  cursor: default;
+  opacity: 0.75;
+}

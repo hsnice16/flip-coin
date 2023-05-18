@@ -1,6 +1,7 @@
 import "./BetHistory.css";
 import { sliceAddress } from "../../utils";
 import { EmptyHistory } from "../../images";
+import { useGetHistory } from "../../hooks";
 
 // const history = [];
 
@@ -14,6 +15,8 @@ const history = new Array(35).fill({
 });
 
 export function BetHistory() {
+  useGetHistory();
+
   return (
     <div className="bet-history__container">
       <h3>Bet History</h3>

@@ -5,6 +5,7 @@ import { useState } from "react";
 
 export function Main() {
   const [selectedCoin, setSelectedCoin] = useState("head");
+  const [didWin, setDidWin] = useState(null);
 
   return (
     <main className="main-container">
@@ -12,8 +13,14 @@ export function Main() {
       {HowToPlayElement}
 
       <div className="bet-input__container">
-        <BetAmountCard isTail={selectedCoin === "tail"} />
+        <BetAmountCard
+          isTail={selectedCoin === "tail"}
+          didWin={didWin}
+          setDidWin={setDidWin}
+          setSelectedCoin={setSelectedCoin}
+        />
         <ChooseOneCoin
+          didWin={didWin}
           selectedCoin={selectedCoin}
           setSelectedCoin={setSelectedCoin}
         />

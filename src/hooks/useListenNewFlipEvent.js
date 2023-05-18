@@ -3,22 +3,22 @@ import { coinFlipABI, COIN_FLIP_CONTRACT } from "../utils";
 import { Contract } from "ethers";
 import { useEffect, useState } from "react";
 
-export function useListenFlipCompletedEvent(setFlipCompleted) {
+export function useListenNewFlipEvent(setNewFlip) {
   const provider = useProvider();
   const [removeListener, setRemoveListener] = useState();
 
   useEffect(() => {
     (async () => {
       const contract = new Contract(COIN_FLIP_CONTRACT, coinFlipABI, provider);
-      contract.on("FlipCompleted", (player, didWin, amount, gameId, event) => {
+      contract.on("FlipCompleted", (user, amount, isTail, gameId, event) => {
         setRemoveListener(event.removeListener);
-        setFlipCompleted((prevValue) => ({
+        setNewFlip((prevValue) => ({
           ...prevValue,
           listening: false,
           gameId,
-          player,
-          didWin,
+          user,
           amount,
+          isTail,
         }));
       });
     })();
