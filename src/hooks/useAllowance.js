@@ -1,4 +1,4 @@
-import { useAccount, useContractRead, useProvider } from "wagmi";
+import { useAccount, useProvider } from "wagmi";
 import { ERC_20_CONTRACT, COIN_FLIP_CONTRACT, erc20ABI } from "../utils";
 import { Contract } from "ethers";
 import { useEffect } from "react";
