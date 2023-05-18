@@ -4,7 +4,7 @@ import { HowToPlayElement } from "../../elements";
 import { useState } from "react";
 
 export function Main() {
-  const [selectedCoin, setSelectedCoin] = useState("bear");
+  const [selectedCoin, setSelectedCoin] = useState("head");
 
   return (
     <main className="main-container">
