@@ -8,8 +8,9 @@ export function useApproveWrite(amount) {
     functionName: "approve",
     args: [COIN_FLIP_CONTRACT, amount],
   });
-  const { isLoading, isSuccess, write } = useContractWrite(config);
-  // isError && console.log("contract-write-error-for-approve", error);
+  const { isLoading, isSuccess, write, isError, error } =
+    useContractWrite(config);
+  isError && console.log("contract-write-error-for-approve", error);
 
   return {
     approveWriteLoading: isLoading,

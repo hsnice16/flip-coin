@@ -9,8 +9,9 @@ export function useFlipWrite(amount, isTail) {
     args: [amount, isTail],
   });
 
-  const { data, isLoading, write, isSuccess } = useContractWrite(config);
-  // isError && console.log("contract-write-error-for-flip", error);
+  const { data, isLoading, write, isSuccess, isError, error } =
+    useContractWrite(config);
+  isError && console.log("contract-write-error-for-flip", error);
 
   return {
     flipWriteReturn: data,
