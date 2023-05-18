@@ -17,8 +17,8 @@
 }
 
 .history-info__container {
-  border-top: 6px solid rgb(117, 81, 255);
-  border-bottom: 6px solid rgb(117, 81, 255);
+  border-top: 6px solid var(--primary-color);
+  border-bottom: 6px solid var(--primary-color);
   max-height: 60rem;
   min-height: 30rem;
   overflow: auto;
@@ -31,7 +31,7 @@ table {
 }
 
 table thead {
-  background-color: rgb(52, 37, 71);
+  background-color: var(--bet-amount-bg-color);
 }
 
 table :is(th, td) {

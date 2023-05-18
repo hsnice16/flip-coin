@@ -1,12 +1,5 @@
 import "./ChooseOneCoin.css";
-import {
-  LeftCurly,
-  RightCurly,
-  BruhChooseCoin,
-  EmptyCoin,
-  BearCoin,
-  PawCoin,
-} from "../../images";
+import { LeftCurly, RightCurly, ChooseCoin, EmptyCoin } from "../../images";
 
 export function ChooseOneCoin({ selectedCoin, setSelectedCoin }) {
   return (
@@ -21,17 +14,17 @@ export function ChooseOneCoin({ selectedCoin, setSelectedCoin }) {
         <div className="coin-option__container">
           <div>
             <button
-              className={selectedCoin === "bear" ? "active" : ""}
-              onClick={() => setSelectedCoin("bear")}
+              className={selectedCoin === "head" ? "active" : ""}
+              onClick={() => setSelectedCoin("head")}
             >
-              <img src={BearCoin} alt="bear coin" />
+              <div className="head-coin" />
             </button>
             <span>or</span>
             <button
-              className={selectedCoin === "paw" ? "active" : ""}
-              onClick={() => setSelectedCoin("paw")}
+              className={selectedCoin === "tail" ? "active" : ""}
+              onClick={() => setSelectedCoin("tail")}
             >
-              <img src={PawCoin} alt="paw coin" />
+              <div className="tail-coin" />
             </button>
           </div>
           <img
@@ -44,7 +37,7 @@ export function ChooseOneCoin({ selectedCoin, setSelectedCoin }) {
 
       <img
         className="choose-coin__img"
-        src={BruhChooseCoin}
+        src={ChooseCoin}
         alt="bruh choose coin"
       />
     </div>

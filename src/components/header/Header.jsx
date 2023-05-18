@@ -5,7 +5,7 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 export function Header() {
   return (
     <header className="header-container">
-      <Logo />
+      <img src={Logo} alt="Morty Logo" className="logo" />
       <div className="header-button__container">
         <ConnectButton chainStatus="icon" />
       </div>

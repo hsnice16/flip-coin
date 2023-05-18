@@ -1,12 +1,17 @@
 .main-container {
   font-family: Mitr;
-  margin: 5.25rem auto;
+  margin: 0 auto 5.25rem;
   max-width: 118rem;
 }
 
 .main-hero__image {
-  display: block;
-  margin: auto;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 10rem;
+  background-position: center;
+  width: 80rem;
+  background-image: url("../../images/hero-image.png");
+  margin: 0 auto;
 }
 
 .main-play__steps {
@@ -27,13 +32,13 @@
 .play-steps__container {
   background: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(7.5px);
-  border-left: 6px solid rgb(117, 81, 255);
-  border-right: 6px solid rgb(117, 81, 255);
+  border-left: 6px solid var(--primary-color);
+  border-right: 6px solid var(--primary-color);
   display: flex;
   align-items: flex-start;
   gap: 5rem;
   padding: 2rem 8.75rem 0;
-  margin: 6rem auto 0;
+  margin: 10rem auto 0;
 }
 
 .play-step {
@@ -63,7 +68,7 @@
 }
 
 .play-step p {
-  color: rgb(213, 184, 249);
+  color: var(--step-para-color);
   display: inline-block;
   font-size: 1.75rem;
   text-align: center;
@@ -78,6 +83,10 @@
 }
 
 @media screen and (max-width: 640px) {
+  .main-hero__image {
+    width: 100%;
+  }
+
   .main-play__steps h1 {
     font-size: 3rem;
     top: -4.75rem;
@@ -86,6 +95,7 @@
   .play-steps__container {
     flex-direction: column;
     align-items: center;
+    margin-top: 6rem;
   }
 
   .bet-input__container {

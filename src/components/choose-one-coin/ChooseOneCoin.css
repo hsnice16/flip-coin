@@ -1,6 +1,6 @@
 .choose-coin__card {
   flex: 1;
-  background: rgb(52, 37, 71);
+  background: var(--bet-amount-bg-color);
   padding: 2.75rem;
   border-radius: 2rem;
   position: relative;
@@ -49,9 +49,22 @@
   transition: border-color 0.3s;
 }
 
-.coin-option__container button > img {
-  width: 10.75rem;
-  height: 10.75rem;
+.coin-option__container button > :is(.head-coin, .tail-coin) {
+  width: 8rem;
+  height: 8rem;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+}
+
+.coin-option__container button > .head-coin {
+  background-image: url("../../images/head.png");
+  box-shadow: 0.05rem 0.05rem 1rem var(--background-color);
+}
+
+.coin-option__container button > .tail-coin {
+  background-image: url("../../images/tail.png");
 }
 
 .coin-option__container button.active {
@@ -70,10 +83,10 @@
 .choose-coin__img {
   position: absolute;
   z-index: 1;
-  right: -6rem;
-  width: 32rem;
-  height: 30rem;
-  bottom: -2.75rem;
+  right: -10rem;
+  width: 42rem;
+  height: 40rem;
+  bottom: -15rem;
 }
 
 @media screen and (max-width: 640px) {
@@ -103,14 +116,18 @@
     flex-direction: row;
   }
 
-  .coin-option__container button,
-  .coin-option__container button > img {
+  .coin-option__container button {
     width: 8.75rem;
     height: 8.75rem;
   }
 
+  .coin-option__container button > :is(.head-coin, .tail-coin) {
+    width: 6rem;
+    height: 6rem;
+  }
+
   .choose-coin__img {
-    bottom: -10rem;
-    right: -6.25rem;
+    bottom: -20rem;
+    right: -12rem;
   }
 }

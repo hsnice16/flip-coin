@@ -1,5 +1,5 @@
 .bet-amount__card {
-  background: rgb(52, 37, 71);
+  background: var(--bet-amount-bg-color);
   max-width: 38rem;
   border-radius: 2rem;
   padding: 2.75rem 3.75rem 2.74rem;
@@ -27,8 +27,8 @@
 }
 
 .amount-card__input {
-  background: rgba(33, 18, 51, 0.7);
-  border: thin solid rgb(59, 45, 77);
+  background: var(--input-bg-color);
+  border: thin solid var(--input-border-color);
   border-radius: 1.25rem;
   display: flex;
   align-items: center;
@@ -54,7 +54,7 @@
   font-family: Mitr;
   font-size: 1.5rem;
   font-weight: normal;
-  color: rgb(117, 81, 255);
+  color: var(--win-color);
   border: none;
   background-color: transparent;
 }
@@ -73,7 +73,7 @@
 }
 
 .divider > span {
-  background: rgb(117, 81, 255);
+  background: var(--primary-color);
   display: inline-block;
   width: 5px;
   height: 5px;

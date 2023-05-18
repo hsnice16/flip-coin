@@ -1,4 +1,3 @@
-import { HeroImage } from "../../images";
 import "./Main.css";
 import { BetAmountCard, ChooseOneCoin, BetHistory } from "../index";
 import { HowToPlayElement } from "../../elements";
@@ -9,11 +8,11 @@ export function Main() {
 
   return (
     <main className="main-container">
-      <HeroImage className="main-hero__image" width="100%" />
+      <div className="main-hero__image"></div>
       {HowToPlayElement}
 
       <div className="bet-input__container">
-        <BetAmountCard isTail={selectedCoin === "paw"} />
+        <BetAmountCard isTail={selectedCoin === "tail"} />
         <ChooseOneCoin
           selectedCoin={selectedCoin}
           setSelectedCoin={setSelectedCoin}

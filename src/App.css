@@ -1,13 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Mitr:wght@200;300;400;500;600;700&display=swap");
 
 :root {
-  --background-color: rgb(23, 0, 52);
+  --background-color: #192509;
   --color-overlay: rgba(255, 255, 255, 0.1);
-  --form-label-color: rgb(140, 126, 159);
-  --primary-color: #7551ff;
+  --form-label-color: rgb(99 140 52);
+  --primary-color: #28a53c;
   --primary-fill-color: white;
   --loss-color: #ef4444;
   --win-color: #22c55d;
+  --step-para-color: #bac832;
+  --connect-wallet-hover-color: #2bae40;
+  --bet-amount-bg-color: rgb(12 60 15);
+  --input-bg-color: rgb(5 32 7);
+  --input-border-color: rgb(73 79 17)
 }
 
 * {
