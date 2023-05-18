@@ -28,7 +28,7 @@ export function BetAmountCard({ isTail }) {
       (Number(enteredAmount) - formatEther(allowance ?? 0)) * 10 ** 18
     );
   const { flipWrite, flipWriteLoading, flipWriteReturn, flipWriteSuccess } =
-    useFlipWrite(Number(enteredAmount) * 10 ** 18, isTail);
+    useFlipWrite();
 
   const formattedProfitAmount = useMemo(() => {
     return Number((Number(enteredAmount) * 2).toFixed(0)).toLocaleString();
@@ -61,8 +61,8 @@ export function BetAmountCard({ isTail }) {
     console.log("flipCompletedLog", log);
     console.log("flipWriteReturn", flipWriteReturn);
   };
-  const unsubscribe = useListenFlipCompletedEvent(flipCompletedListener);
 
+  const unsubscribe = useListenFlipCompletedEvent(flipCompletedListener);
   useEffect(() => {
     return () => unsubscribe && unsubscribe();
 
@@ -96,7 +96,7 @@ export function BetAmountCard({ isTail }) {
     setEnteredAmount(maxValue);
   };
 
-  const handleApproveClick = () => {
+  const handleApproveClick = async () => {
     if (Number(enteredAmount) === 0) {
       setError("Enter some amount");
       return;
@@ -113,15 +113,15 @@ export function BetAmountCard({ isTail }) {
     }
 
     if (Number(enteredAmount) > formatEther(allowance)) {
-      approveWrite?.();
+      await approveWrite(enteredAmount);
       return;
     }
 
     setShowBetText(true);
   };
 
-  const handleBetClick = () => {
-    flipWrite?.();
+  const handleBetClick = async () => {
+    await flipWrite(enteredAmount, isTail);
   };
 
   return (
