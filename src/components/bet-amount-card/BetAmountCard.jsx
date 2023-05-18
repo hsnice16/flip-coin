@@ -1,79 +1,76 @@
 import { Button } from "../index";
 import "./BetAmountCard.css";
-import { isValidInputValue, COIN, formatEther, MINIMUM_BET } from "../../utils";
-import { useEffect, useMemo, useState } from "react";
-import {
-  useAllowance,
-  useUserMortyBalance,
-  useMaxBet,
-  useApproveWrite,
-  useFlipWrite,
-  useListenFlipCompletedEvent,
-} from "../../hooks";
+import { isValidInputValue, COIN, MINIMUM_BET } from "../../utils";
+import { useAllowance } from "../../hooks";
 import { useAccount } from "wagmi";
+import { useMemo, useState } from "react";
 
 export function BetAmountCard({ isTail }) {
   const [error, setError] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
-  const [showBetText, setShowBetText] = useState(false);
+  const [, setShowBetText] = useState(false);
 
   const { address } = useAccount();
-  const { allowance, isLoadingAllowance } = useAllowance();
-  const userMortyBalance = useUserMortyBalance();
-  const maxBet = useMaxBet();
-  const [startListeningEvent, setStartListeningEvent] = useState(false);
+  // const { allowance, isLoadingAllowance } = useAllowance();
+  useAllowance();
+  // const userMortyBalance = useUserMortyBalance();
+  // const maxBet = useMaxBet();
+  // const [startListeningEvent, setStartListeningEvent] = useState(false);
 
-  const { approveWrite, approveWriteLoading, approveWriteSuccess } =
-    useApproveWrite(
-      (Number(enteredAmount) - formatEther(allowance ?? 0)) * 10 ** 18
-    );
-  const { flipWrite, flipWriteLoading, flipWriteReturn, flipWriteSuccess } =
-    useFlipWrite(Number(enteredAmount) * 10 ** 18, isTail);
+  // const { approveWrite, approveWriteLoading, approveWriteSuccess } =
+  //   useApproveWrite(
+  //     (Number(enteredAmount) - formatEther(allowance ?? 0)) * 10 ** 18
+  //   );
+  // const { flipWrite, flipWriteLoading, flipWriteReturn, flipWriteSuccess } =
+  //   useFlipWrite(Number(enteredAmount) * 10 ** 18, isTail);
 
   const formattedProfitAmount = useMemo(() => {
     return Number((Number(enteredAmount) * 2).toFixed(0)).toLocaleString();
   }, [enteredAmount]);
 
-  const approveBtnText = useMemo(() => {
-    if (
-      isLoadingAllowance ||
-      approveWriteLoading ||
-      flipWriteLoading ||
-      startListeningEvent
-    )
-      return "Waiting...";
+  const approveBtnText = useMemo(
+    () => {
+      // if (
+      //   isLoadingAllowance ||
+      //   approveWriteLoading ||
+      //   flipWriteLoading ||
+      //   startListeningEvent
+      // )
+      //   return "Waiting...";
 
-    if (approveWriteSuccess || showBetText) return "Bet";
+      // if (approveWriteSuccess || showBetText) return "Bet";
 
-    return "Approve";
-  }, [
-    isLoadingAllowance,
-    approveWriteLoading,
-    approveWriteSuccess,
-    showBetText,
-    flipWriteLoading,
-    startListeningEvent,
-  ]);
+      return "Approve";
+    },
+    [
+      // isLoadingAllowance,
+      // approveWriteLoading,
+      // approveWriteSuccess,
+      // showBetText,
+      // flipWriteLoading,
+      // startListeningEvent,
+    ]
+  );
 
-  const flipCompletedListener = (log) => {
-    setStartListeningEvent(false);
-    setShowBetText(false);
-    console.log("flipCompletedLog", log);
-    console.log("flipWriteReturn", flipWriteReturn);
-  };
-  const unsubscribe = useListenFlipCompletedEvent(flipCompletedListener);
+  // const flipCompletedListener = (log) => {
+  //   setStartListeningEvent(false);
+  //   setShowBetText(false);
+  //   console.log("flipCompletedLog", log);
+  // console.log("flipWriteReturn", flipWriteReturn);
+  // };
+  // const unsubscribe = useListenFlipCompletedEvent(flipCompletedListener);
 
-  useEffect(() => {
-    return () => unsubscribe && unsubscribe();
+  // useEffect(() => {
+  //   return () => unsubscribe && unsubscribe();
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
-  useEffect(() => {
-    if (flipWriteSuccess && !flipWriteLoading) {
-      setStartListeningEvent(true);
-    }
-  }, [flipWriteSuccess, flipWriteLoading]);
+  // useEffect(() => {
+  //   if (flipWriteSuccess && !flipWriteLoading) {
+  //     setStartListeningEvent(true);
+  //   }
+  // }, [flipWriteSuccess, flipWriteLoading]);
 
   const handleInputChange = (event) => {
     const value = event.target.value;
@@ -89,11 +86,11 @@ export function BetAmountCard({ isTail }) {
   const handleMaxClick = () => {
     error && setError("");
 
-    const maxValue = Math.max(
-      formatEther(maxBet ?? 0),
-      formatEther(userMortyBalance ?? 0)
-    );
-    setEnteredAmount(maxValue);
+    // const maxValue = Math.max(
+    //   formatEther(maxBet ?? 0),
+    //   formatEther(userMortyBalance ?? 0)
+    // );
+    // setEnteredAmount(maxValue);
   };
 
   const handleApproveClick = () => {
@@ -107,21 +104,21 @@ export function BetAmountCard({ isTail }) {
       return;
     }
 
-    if (isLoadingAllowance === false && allowance === undefined) {
-      setError("Issue in getting your allowance");
-      return;
-    }
+    // if (isLoadingAllowance === false && allowance === undefined) {
+    //   setError("Issue in getting your allowance");
+    //   return;
+    // }
 
-    if (Number(enteredAmount) > formatEther(allowance)) {
-      approveWrite?.();
-      return;
-    }
+    // if (Number(enteredAmount) > formatEther(allowance)) {
+    //   approveWrite?.();
+    //   return;
+    // }
 
     setShowBetText(true);
   };
 
   const handleBetClick = () => {
-    flipWrite?.();
+    // flipWrite?.();
   };
 
   return (

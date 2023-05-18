@@ -4,36 +4,35 @@ import App from "./App";
 
 import "./polyfills";
 import {
-  getDefaultWallets,
   RainbowKitProvider,
   darkTheme,
+  getDefaultWallets,
 } from "@rainbow-me/rainbowkit";
-import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { mainnet, polygonMumbai } from "wagmi/chains";
+import { configureChains, createClient, WagmiConfig } from "wagmi";
+import { polygonMumbai, mainnet } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 
-const { chains, publicClient, webSocketPublicClient } = configureChains(
+const { chains, provider, webSocketProvider } = configureChains(
   [mainnet, polygonMumbai],
   [publicProvider()]
 );
 
 const { connectors } = getDefaultWallets({
   appName: "Flip Coin Game",
-  projectId: "YOUR_PROJECT_ID",
   chains,
 });
 
-const wagmiConfig = createConfig({
+const wagmiClient = createClient({
   autoConnect: true,
   connectors,
-  publicClient,
-  webSocketPublicClient,
+  provider,
+  webSocketProvider,
 });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <WagmiConfig config={wagmiConfig}>
+    <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider
         chains={chains}
         theme={darkTheme({ accentColor: "#7551FF" })}

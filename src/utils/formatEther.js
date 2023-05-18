@@ -1,5 +1,5 @@
-import { formatEther as ether } from "viem";
+import { ethers } from "ethers";
 
 export function formatEther(value) {
-  return Number(ether(value));
+  return Number(ethers.utils.formatEther(value));
 }
