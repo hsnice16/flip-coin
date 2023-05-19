@@ -56,27 +56,6 @@ table td.address-col {
   color: var(--form-label-color);
 }
 
-table td.streak > span {
-  display: inline-flex;
-  align-items: center;
-}
-
-table td.streak .circle {
-  display: inline-block;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  margin-right: 0.5rem;
-}
-
-table td.number-col .circle.win {
-  background-color: var(--win-color);
-}
-
-table td.number-col .circle.loss {
-  background-color: var(--loss-color);
-}
-
 table td.number-col.win {
   color: var(--win-color);
 }

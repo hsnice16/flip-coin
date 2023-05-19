@@ -1,17 +1,52 @@
-import { COIN_FLIP_CONTRACT, coinFlipABI } from "../utils";
-import { useEffect } from "react";
-import { useProvider } from "wagmi";
-import { Contract } from "ethers";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
+
+const URL =
+  "https://api.studio.thegraph.com/query/39089/mortycoinflip-v1/v0.0.1";
+
+export function useInvalidateBetHistory() {
+  const queryClient = useQueryClient();
+
+  return () => {
+    queryClient.invalidateQueries("bet-history");
+  };
+}
 
 export function useGetHistory() {
-  const provider = useProvider();
+  return useQuery(["bet-history"], async () => {
+    // GraphQL query with a filter for a specific gameId
+    const FLIP_COMPLETED_QUERY = `
+    {
+      flipCompleteds(
+        orderBy: blockTimestamp,
+        orderDirection: desc,
+        first: 20
+      ) {
+        id
+        player
+        didWin
+        isTail
+        amount
+        gameId
+        blockNumber
+        blockTimestamp
+        transactionHash
+      }
+    }
+    `;
 
-  useEffect(() => {
-    (async () => {
-      const contract = new Contract(COIN_FLIP_CONTRACT, coinFlipABI, provider);
-      const filter = contract.filters.FlipCompleted;
-      const events = await contract.queryFilter(filter, -25);
-      console.log("history", events);
-    })();
-  }, [provider]);
+    const {
+      data: {
+        data: { flipCompleteds },
+      },
+    } = await axios({
+      url: URL,
+      method: "POST",
+      data: {
+        query: FLIP_COMPLETED_QUERY,
+      },
+    });
+
+    return flipCompleteds;
+  });
 }

@@ -11,6 +11,7 @@ import {
 import { configureChains, createClient, WagmiConfig } from "wagmi";
 import { polygonMumbai, mainnet } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
 const { chains, provider, webSocketProvider } = configureChains(
   [mainnet, polygonMumbai],
@@ -37,7 +38,9 @@ root.render(
         chains={chains}
         theme={darkTheme({ accentColor: "#28a53c" })}
       >
-        <App />
+        <QueryClientProvider client={new QueryClient()}>
+          <App />
+        </QueryClientProvider>
       </RainbowKitProvider>
     </WagmiConfig>
   </React.StrictMode>

@@ -76,6 +76,12 @@
       },
       {
         "indexed": false,
+        "internalType": "bool",
+        "name": "isTail",
+        "type": "bool"
+      },
+      {
+        "indexed": false,
         "internalType": "uint256",
         "name": "amount",
         "type": "uint256"

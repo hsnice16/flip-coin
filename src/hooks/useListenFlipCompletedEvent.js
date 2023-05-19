@@ -10,17 +10,20 @@ export function useListenFlipCompletedEvent(setFlipCompleted) {
   useEffect(() => {
     (async () => {
       const contract = new Contract(COIN_FLIP_CONTRACT, coinFlipABI, provider);
-      contract.on("FlipCompleted", (player, didWin, amount, gameId, event) => {
-        setRemoveListener(event.removeListener);
-        setFlipCompleted((prevValue) => ({
-          ...prevValue,
-          listening: false,
-          gameId,
-          player,
-          didWin,
-          amount,
-        }));
-      });
+      contract.on(
+        "FlipCompleted",
+        (player, didWin, isTail, amount, gameId, event) => {
+          setRemoveListener(event?.removeListener);
+          setFlipCompleted((prevValue) => ({
+            ...prevValue,
+            gameId,
+            isTail,
+            player,
+            didWin,
+            amount,
+          }));
+        }
+      );
     })();
 
     return () => {

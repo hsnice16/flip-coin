@@ -16,6 +16,7 @@ import {
   useFlipWrite,
   useListenFlipCompletedEvent,
   useListenNewFlipEvent,
+  useInvalidateBetHistory,
 } from "../../hooks";
 import { useAccount } from "wagmi";
 import { useMemo, useState, useEffect } from "react";
@@ -40,21 +41,17 @@ export function BetAmountCard({ isTail, didWin, setDidWin, setSelectedCoin }) {
       (Number(enteredAmount) - formatEther(allowance ?? 0)) * 10 ** 18
     );
   const { flipWrite, flipWriteLoading, flipWriteSuccess } = useFlipWrite();
+  const invalidateBetHistory = useInvalidateBetHistory();
+  const [listeningEvents, setListeningEvents] = useState(false);
 
   const formattedProfitAmount = useMemo(() => {
     return Number((Number(enteredAmount) * 2).toFixed(0)).toLocaleString();
   }, [enteredAmount]);
 
   const approveBtnText = useMemo(() => {
-    if (newFlip.listening && flipCompleted.listening) return "Listening...";
+    if (listeningEvents) return "Checking...";
 
-    if (
-      isLoadingAllowance ||
-      approveWriteLoading ||
-      flipWriteLoading ||
-      flipCompleted.listening ||
-      newFlip.listening
-    )
+    if (isLoadingAllowance || approveWriteLoading || flipWriteLoading)
       return "Waiting...";
 
     if (approveWriteSuccess || showBetText) return "Bet";
@@ -66,8 +63,7 @@ export function BetAmountCard({ isTail, didWin, setDidWin, setSelectedCoin }) {
     approveWriteSuccess,
     showBetText,
     flipWriteLoading,
-    flipCompleted.listening,
-    newFlip.listening,
+    listeningEvents,
   ]);
 
   useListenFlipCompletedEvent(setFlipCompleted);
@@ -75,8 +71,7 @@ export function BetAmountCard({ isTail, didWin, setDidWin, setSelectedCoin }) {
 
   useEffect(() => {
     if (flipWriteSuccess && !flipWriteLoading) {
-      setFlipCompleted((prevValue) => ({ ...prevValue, listening: true }));
-      setNewFlip((prevValue) => ({ ...prevValue, listening: true }));
+      setListeningEvents(true);
     }
   }, [flipWriteSuccess, flipWriteLoading]);
 
@@ -84,6 +79,8 @@ export function BetAmountCard({ isTail, didWin, setDidWin, setSelectedCoin }) {
     if (newFlip.gameId && flipCompleted.gameId) {
       if (Number(newFlip.gameId) === Number(flipCompleted.gameId)) {
         setDidWin(flipCompleted.didWin);
+        setListeningEvents(false);
+        invalidateBetHistory();
       }
     }
 
@@ -152,6 +149,7 @@ export function BetAmountCard({ isTail, didWin, setDidWin, setSelectedCoin }) {
     setNewFlip(NEW_FLIP_INITIAL_VALUE);
     setFlipCompleted(FLIP_COMPLETED_INITIAL_VALUE);
     setSelectedCoin("head");
+    setEnteredAmount("");
   };
 
   return (
