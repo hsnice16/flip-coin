@@ -168,7 +168,7 @@ export function BetAmountCard({ isTail, didWin, setDidWin, setSelectedCoin }) {
     >
       <div
         className={`didWin-container ${
-          approveBtnText !== "Listening..." ? "hide" : ""
+          approveBtnText !== "Checking..." ? "hide" : ""
         }`}
       >
         <div className="listening">
