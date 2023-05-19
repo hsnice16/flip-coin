@@ -105,7 +105,7 @@ export function BetAmountCard({ isTail, didWin, setDidWin, setSelectedCoin }) {
       formatEther(maxBet ?? 0),
       formatEther(userMortyBalance ?? 0)
     );
-    setEnteredAmount(maxValue);
+    setEnteredAmount(maxValue.toFixed(2));
   };
 
   const handleApproveClick = async () => {
@@ -127,6 +127,15 @@ export function BetAmountCard({ isTail, didWin, setDidWin, setSelectedCoin }) {
     if (Number(maxBet) === 0) {
       setError(
         "There is no balance in the contract at the moment. No betting."
+      );
+      return;
+    }
+
+    if (Number(enteredAmount) > formatEther(maxBet)) {
+      setError(
+        `Not a Valid Bet. You can bet max ${Number(formatEther(maxBet)).toFixed(
+          2
+        )}`
       );
       return;
     }
