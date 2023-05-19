@@ -127,6 +127,13 @@ export function BetAmountCard({ isTail, didWin, setDidWin, setSelectedCoin }) {
       return;
     }
 
+    if (Number(maxBet) === 0) {
+      setError(
+        "There is no balance in the contract at the moment. No betting."
+      );
+      return;
+    }
+
     if (Number(enteredAmount) > formatEther(allowance)) {
       await approveWrite(enteredAmount);
       return;
@@ -152,6 +159,17 @@ export function BetAmountCard({ isTail, didWin, setDidWin, setSelectedCoin }) {
       className="bet-amount__card"
       onSubmit={(event) => event.preventDefault()}
     >
+      <div
+        className={`didWin-container ${
+          approveBtnText !== "Listening..." ? "hide" : ""
+        }`}
+      >
+        <div className="listening">
+          <h2>Checking...</h2>
+          <h3>🤞</h3>
+        </div>
+      </div>
+
       <div className={`didWin-container ${didWin === null ? "hide" : ""}`}>
         <div className={`didWin-text__container ${didWin ? "win" : ""}`}>
           <h2>You {didWin ? "Win" : "Loss"}</h2>

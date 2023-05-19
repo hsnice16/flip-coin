@@ -1,7 +1,5 @@
 export * from "./StepNumBg";
 export { default as Bricks } from "./bricks.png";
-// export { default as BruhChooseCoin } from "./bruh-choose-coin.png";
-export { default as EmptyCoin } from "./empty-coin.webp";
 export * from "./LeftCurly";
 export * from "./RightCurly";
 export * from "./EmptyHistory";
@@ -10,3 +8,4 @@ export { default as Tail } from "./tail.png";
 export { default as Head } from "./head.png";
 export { default as HeroImage } from "./hero-image.png";
 export { default as ChooseCoin } from "./choose-coin.png";
+export { default as EmptyCoin } from "./empty-coin.PNG";
