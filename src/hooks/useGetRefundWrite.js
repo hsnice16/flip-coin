@@ -1,27 +1,27 @@
 import { useSigner } from "wagmi";
 import { COIN_FLIP_CONTRACT, coinFlipABI } from "../utils";
 import { useState } from "react";
-import { Contract, utils } from "ethers";
+import { Contract } from "ethers";
 
-export function useFlipWrite() {
+export function useGetRefundWrite() {
   const { data: signer } = useSigner();
   const [states, setStates] = useState({
     isSuccess: false,
     isLoading: false,
   });
 
-  const { isSuccess, isLoading } = states;
+  const { isLoading, isSuccess } = states;
 
-  const flipWrite = async (amount, isTail) => {
+  const getRefundWrite = async () => {
     try {
       setStates((prevValue) => ({
         ...prevValue,
-        isSuccess: false,
         isLoading: true,
+        isSuccess: false,
       }));
 
       const contract = new Contract(COIN_FLIP_CONTRACT, coinFlipABI, signer);
-      const tx = await contract.flip(utils.parseEther(amount), isTail);
+      const tx = await contract.getRefund();
       await tx.wait();
 
       setStates((prevValue) => ({
@@ -30,18 +30,15 @@ export function useFlipWrite() {
         isSuccess: true,
       }));
     } catch (error) {
-      setStates((prevValue) => ({
-        ...prevValue,
-        isLoading: false,
-      }));
+      setStates((prevValue) => ({ ...prevValue, isLoading: false }));
 
-      console.log("contract-write-error-for-flip", error);
+      console.log("contract-write-error-for-getRefund", error);
     }
   };
 
   return {
-    flipWriteLoading: isLoading,
-    flipWrite,
-    flipWriteSuccess: isSuccess,
+    getRefundWriteLoading: isLoading,
+    getRefundWrite,
+    getRefundWriteSuccess: isSuccess,
   };
 }

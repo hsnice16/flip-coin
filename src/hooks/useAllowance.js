@@ -8,14 +8,11 @@ export function useAllowance() {
   const { address } = useAccount();
 
   const [states, setStates] = useState({
-    isError: false,
-    error: "",
     isLoading: false,
     isSuccess: false,
     data: "",
   });
-
-  const { isError, error, isLoading, isSuccess, data } = states;
+  const { isLoading, isSuccess, data } = states;
 
   useEffect(() => {
     if (address && provider) {
@@ -25,7 +22,6 @@ export function useAllowance() {
             ...prevValue,
             isLoading: true,
             isSuccess: false,
-            isError: false,
           }));
 
           const contract = new Contract(ERC_20_CONTRACT, erc20ABI, provider);
@@ -40,16 +36,15 @@ export function useAllowance() {
         } catch (error) {
           setStates((prevValue) => ({
             ...prevValue,
-            isError: true,
-            error,
             isLoading: false,
           }));
+
+          console.log("contract-read-error-for-allowance", error);
         }
       })();
     }
   }, [address, provider]);
 
-  isError && console.log("contract-read-error-for-allowance", error);
   return {
     allowance: isSuccess ? data : undefined,
     isLoadingAllowance: isLoading,

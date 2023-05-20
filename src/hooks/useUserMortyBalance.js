@@ -10,11 +10,8 @@ export function useUserMortyBalance() {
   const [states, setStates] = useState({
     data: "",
     isSuccess: false,
-    isError: false,
-    error: "",
   });
-
-  const { data, isError, isSuccess, error } = states;
+  const { data, isSuccess } = states;
 
   useEffect(() => {
     if (address && provider) {
@@ -23,7 +20,6 @@ export function useUserMortyBalance() {
       try {
         setStates((prevValue) => ({
           ...prevValue,
-          isError: false,
           isSuccess: false,
         }));
 
@@ -32,11 +28,10 @@ export function useUserMortyBalance() {
 
         setStates((prevValue) => ({ ...prevValue, isSuccess: true, data }));
       } catch (error) {
-        setStates((prevValue) => ({ ...prevValue, isError: true, error }));
+        console.log("contract-read-error-for-balanceOf", error);
       }
     })();
   }, [address, provider]);
 
-  isError && console.log("contract-read-error-for-balanceOf", error);
   return isSuccess ? data : undefined;
 }

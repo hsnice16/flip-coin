@@ -5,21 +5,17 @@ import { Contract, utils } from "ethers";
 
 export function useApproveWrite(amount) {
   const { data: signer } = useSigner();
-
   const [states, setStates] = useState({
-    isError: false,
     isLoading: false,
     isSuccess: false,
-    error: "",
   });
 
-  const { isError, error, isLoading, isSuccess } = states;
+  const { isLoading, isSuccess } = states;
 
   const approveWrite = async (amount) => {
     try {
       setStates((prevValue) => ({
         ...prevValue,
-        isError: false,
         isSuccess: false,
         isLoading: true,
       }));
@@ -39,14 +35,13 @@ export function useApproveWrite(amount) {
     } catch (error) {
       setStates((prevValue) => ({
         ...prevValue,
-        isError: true,
-        error,
         isLoading: false,
       }));
+
+      console.log("contract-write-error-for-approve", error);
     }
   };
 
-  isError && console.log("contract-write-error-for-approve", error);
   return {
     approveWriteLoading: isLoading,
     approveWriteSuccess: isSuccess,

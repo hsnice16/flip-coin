@@ -12,7 +12,8 @@
   --connect-wallet-hover-color: #2bae40;
   --bet-amount-bg-color: rgb(12 60 15);
   --input-bg-color: rgb(5 32 7);
-  --input-border-color: rgb(73 79 17)
+  --input-border-color: rgb(73 79 17);
+  --pause-bg-color: rgba(0, 0, 0, 0.65);
 }
 
 * {

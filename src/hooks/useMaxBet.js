@@ -5,15 +5,12 @@ import { Contract } from "ethers";
 
 export function useMaxBet() {
   const provider = useProvider();
-
   const [states, setStates] = useState({
     data: "",
     isSuccess: false,
-    isError: false,
-    error: "",
   });
 
-  const { data, isError, isSuccess, error } = states;
+  const { data, isSuccess } = states;
 
   useEffect(() => {
     if (provider) {
@@ -21,7 +18,6 @@ export function useMaxBet() {
         try {
           setStates((prevValue) => ({
             ...prevValue,
-            isError: false,
             isSuccess: false,
           }));
 
@@ -34,12 +30,11 @@ export function useMaxBet() {
 
           setStates((prevValue) => ({ ...prevValue, isSuccess: true, data }));
         } catch (error) {
-          setStates((prevValue) => ({ ...prevValue, isError: true, error }));
+          console.log("contract-read-error-maxBet", error);
         }
       })();
     }
   }, [provider]);
 
-  isError && console.log("contract-read-error-maxBet", error);
   return isSuccess ? data : undefined;
 }
