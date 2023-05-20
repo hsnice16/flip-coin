@@ -83,6 +83,13 @@
   margin: 0;
 }
 
+.listening > h3.pending-bet__amt {
+  font-size: 2rem;
+  color: var(--form-label-color);
+  word-break: break-word;
+  margin-bottom: 5rem;
+}
+
 /***** didWin === null *****/
 
 .amount-card__labels {
@@ -188,6 +195,7 @@
   margin-bottom: 0.25rem;
   display: inline-block;
   min-height: 0.75rem;
+  word-break: break-word;
 }
 
 .btn-approve {

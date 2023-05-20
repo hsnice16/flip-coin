@@ -57,7 +57,7 @@ export function BetAmountCard({ isTail, didWin, setDidWin, setSelectedCoin }) {
 
   const { approveWrite, approveWriteLoading, approveWriteSuccess } =
     useApproveWrite(
-      (Number(enteredAmount) - formatEther(allowance ?? 0)) * 10 ** 18
+      (Number(enteredAmount) - Number(formatEther(allowance))) * 10 ** 18
     );
 
   const { getRefundWrite, getRefundWriteLoading, getRefundWriteSuccess } =
@@ -174,11 +174,14 @@ export function BetAmountCard({ isTail, didWin, setDidWin, setSelectedCoin }) {
   const handleMaxClick = () => {
     error && setError("");
 
-    const maxValue = Math.max(
-      formatEther(maxBet ?? 0),
-      formatEther(userMortyBalance ?? 0)
-    );
-    setEnteredAmount(maxValue.toFixed(2));
+    const maxBetInEth = formatEther(maxBet);
+    const userMortyBalanceInEth = formatEther(userMortyBalance);
+
+    if (Number(maxBetInEth) > Number(userMortyBalanceInEth)) {
+      setEnteredAmount(userMortyBalanceInEth);
+    } else {
+      setEnteredAmount(maxBetInEth);
+    }
   };
 
   const handleApproveClick = async () => {
@@ -204,16 +207,12 @@ export function BetAmountCard({ isTail, didWin, setDidWin, setSelectedCoin }) {
       return;
     }
 
-    if (Number(enteredAmount) > formatEther(maxBet)) {
-      setError(
-        `Not a Valid Bet. You can bet max ${Number(formatEther(maxBet)).toFixed(
-          2
-        )}`
-      );
+    if (Number(enteredAmount) > Number(formatEther(maxBet))) {
+      setError(`Not a Valid Bet. You can bet max ${formatEther(maxBet)}`);
       return;
     }
 
-    if (Number(enteredAmount) > formatEther(allowance)) {
+    if (Number(enteredAmount) > Number(formatEther(allowance))) {
       await approveWrite(enteredAmount);
       return;
     }
@@ -261,6 +260,11 @@ export function BetAmountCard({ isTail, didWin, setDidWin, setSelectedCoin }) {
               ? "Last bet still pending..."
               : "Checking..."}
           </h2>
+          {isLastBetStillPending && (
+            <h3 className="pending-bet__amt">
+              You bet for {formatEther(newFlip.amount)}
+            </h3>
+          )}
           <h3>🤞</h3>
         </div>
       </div>
