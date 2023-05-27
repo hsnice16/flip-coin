@@ -90,6 +90,11 @@
   margin-bottom: 5rem;
 }
 
+.spinning-coin {
+  width: 10rem;
+  height: 10rem;
+}
+
 /***** didWin === null *****/
 
 .amount-card__labels {

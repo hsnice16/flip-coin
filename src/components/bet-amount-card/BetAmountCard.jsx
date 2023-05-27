@@ -1,5 +1,6 @@
 import { Button } from "../index";
 import "./BetAmountCard.css";
+import { SpinningCoin } from "../../images";
 import {
   isValidInputValue,
   formatEther,
@@ -258,14 +259,18 @@ export function BetAmountCard({ isTail, didWin, setDidWin, setSelectedCoin }) {
           <h2>
             {isLastBetStillPending
               ? "Last bet still pending..."
-              : "Checking..."}
+              : "Tossing the coin..."}
           </h2>
           {isLastBetStillPending && (
             <h3 className="pending-bet__amt">
               You bet for {formatEther(newFlip.amount)}
             </h3>
           )}
-          <h3>🤞</h3>
+          <img
+            className="spinning-coin"
+            src={SpinningCoin}
+            alt="spinning coin gif"
+          />
         </div>
       </div>
 
@@ -283,7 +288,7 @@ export function BetAmountCard({ isTail, didWin, setDidWin, setSelectedCoin }) {
 
       <div className={`didWin-container ${didWin === null ? "hide" : ""}`}>
         <div className={`didWin-text__container ${didWin ? "win" : ""}`}>
-          <h2>You {didWin ? "Win" : "Loss"}</h2>
+          <h2>You {didWin ? "Win" : "Lost"}</h2>
           {didWin && <h3>You will get the reward in your wallet</h3>}
         </div>
         <Button className="btn-approve" onClick={handleNewBetClick}>
