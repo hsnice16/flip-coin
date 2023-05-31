@@ -6,10 +6,10 @@
 
 .main-hero__image {
   background-repeat: no-repeat;
-  background-size: cover;
-  height: 10rem;
+  background-size: contain;
+  height: 20rem;
   background-position: center;
-  width: 80rem;
+  width: 100rem;
   background-image: url("../../images/hero-image.png");
   margin: 0 auto;
 }

@@ -36,7 +36,7 @@ root.render(
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider
         chains={chains}
-        theme={darkTheme({ accentColor: "#28a53c" })}
+        theme={darkTheme({ accentColor: "#134e7e" })}
       >
         <QueryClientProvider client={new QueryClient()}>
           <App />

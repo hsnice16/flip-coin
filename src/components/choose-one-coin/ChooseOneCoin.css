@@ -1,6 +1,6 @@
 .choose-coin__card {
   flex: 1;
-  background: var(--bet-amount-bg-color);
+  background: var(--primary-fill-color);
   padding: 2.75rem;
   border-radius: 2rem;
   position: relative;
@@ -33,6 +33,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: var(--primary-fill-color);
 }
 
 .coin-option__container button {
@@ -83,10 +84,10 @@
 .choose-coin__img {
   position: absolute;
   z-index: 1;
-  right: -10rem;
-  width: 42rem;
-  height: 40rem;
-  bottom: -15rem;
+  right: -1rem;
+  width: 24rem;
+  height: 24rem;
+  bottom: -1rem;
 }
 
 @media screen and (max-width: 640px) {
@@ -127,7 +128,7 @@
   }
 
   .choose-coin__img {
-    bottom: -20rem;
-    right: -12rem;
+    bottom: -3rem;
+    right: -4rem;
   }
 }

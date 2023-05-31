@@ -59,11 +59,7 @@ export function ChooseOneCoin({ selectedCoin, setSelectedCoin, didWin }) {
         </div>
       </div>
 
-      <img
-        className="choose-coin__img"
-        src={ChooseCoin}
-        alt="bruh choose coin"
-      />
+      <img className="choose-coin__img" src={ChooseCoin} alt="choose coin" />
     </div>
   );
 }
