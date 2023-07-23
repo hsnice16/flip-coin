@@ -132,16 +132,17 @@
   border-radius: 1.25rem;
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  padding: 1.5rem 2rem;
+  gap: 1rem;
+  padding: 1.5rem;
+  justify-content: space-between;
 }
 
 .amount-card__input input {
-  flex: 1;
+  max-width: 82.5%;
   border: none;
   background-color: transparent;
   font-weight: normal;
-  font-size: 1rem;
+  font-size: 1.25rem;
   font-family: "Press Start 2P", cursive;
   color: var(--primary-fill-color);
 }
@@ -199,8 +200,8 @@
 
 .profit-amount__container .profit-amount {
   display: inline-block;
-  max-width: 12rem;
-  overflow: hidden;
+  max-width: 15rem;
+  overflow-y: auto;
 }
 
 .error-text {
