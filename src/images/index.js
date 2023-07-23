@@ -3,7 +3,7 @@ export { default as Bricks } from "./bricks.png";
 export * from "./LeftCurly";
 export * from "./RightCurly";
 export * from "./EmptyHistory";
-export { default as Logo } from "./logo.png";
+export { default as Logo } from "./logo.jpeg";
 export { default as Tail } from "./tail.png";
 export { default as Head } from "./head.png";
 export { default as HeroImage } from "./hero-image.png";

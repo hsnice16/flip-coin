@@ -1,5 +1,5 @@
 .main-container {
-  font-family: Mitr;
+  font-family: "Press Start 2P", cursive;
   margin: 0 auto 5.25rem;
   max-width: 118rem;
 }
@@ -24,9 +24,9 @@
   position: absolute;
   z-index: 1;
   width: 100%;
-  top: -9.25rem;
+  top: -7.25rem;
   font-weight: 600;
-  font-size: 5.5rem;
+  font-size: 5rem;
 }
 
 .play-steps__container {
@@ -56,7 +56,7 @@
 .play-step span {
   color: var(--primary-fill-color);
   position: relative;
-  font-size: 2.25rem;
+  font-size: 2rem;
 }
 
 .play-step .step-num__svg {
@@ -70,9 +70,10 @@
 .play-step p {
   color: var(--step-para-color);
   display: inline-block;
-  font-size: 1.75rem;
+  font-size: 1.25rem;
   text-align: center;
-  margin-top: 0;
+  margin-top: 1.25rem;
+  line-height: 1.5em;
 }
 
 .bet-input__container {

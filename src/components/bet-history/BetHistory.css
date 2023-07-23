@@ -33,6 +33,7 @@ table {
 
 table thead {
   background-color: var(--bet-amount-bg-color);
+  font-size: 1.25rem;
 }
 
 table :is(th, td) {
@@ -51,10 +52,8 @@ table th {
 
 table td {
   color: var(--primary-color);
-  font-size: 1.5rem;
-  font-family: Formular, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-size: 1.1rem;
+  font-family: "Press Start 2P", cursive;
 }
 
 table td.address-col {
