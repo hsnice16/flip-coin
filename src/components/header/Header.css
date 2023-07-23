@@ -25,6 +25,7 @@
   border-radius: 10px;
   font-family: Mitr;
   font-weight: normal;
+  color: var(--connect-wallet-text-color);
 }
 
 .header-button__container

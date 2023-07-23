@@ -10,7 +10,7 @@ export const HowToPlayElement = (
           1
           <StepNumBg className="step-num__svg" />
         </span>
-        <p>Choose heads or tails</p>
+        <p>Choose mario or draco</p>
       </div>
 
       <div className="play-step">

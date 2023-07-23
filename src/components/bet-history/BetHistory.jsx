@@ -73,7 +73,7 @@ function TableRow({ entry }) {
     <tr>
       <td>{timeDurationToShow}</td>
       <td className="address-col">{sliceAddress(player)}</td>
-      <td>{isTail ? "Tails" : "Heads"}</td>
+      <td>{isTail ? "Draco" : "Mario"}</td>
       <td className="number-col">{wager}</td>
       <td className={`number-col ${didWin ? "win" : "loss"}`}>
         {didWin ? "+" : "-"}

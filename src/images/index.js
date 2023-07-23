@@ -10,3 +10,4 @@ export { default as HeroImage } from "./hero-image.png";
 export { default as ChooseCoin } from "./choose-coin.png";
 export { default as EmptyCoin } from "./empty-coin.PNG";
 export { default as SpinningCoin } from "./spinning-coin.gif";
+export { default as MarioDraco } from "./mario-draco.jpeg";
