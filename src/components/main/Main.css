@@ -85,7 +85,7 @@
 
 @media screen and (max-width: 640px) {
   .main-hero__image {
-    width: 100%;
+    width: 75%;
   }
 
   .main-play__steps h1 {
