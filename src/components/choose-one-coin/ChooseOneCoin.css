@@ -86,10 +86,10 @@
 .choose-coin__img {
   position: absolute;
   z-index: 1;
-  right: 0rem;
+  right: -0.5rem;
   width: 24rem;
   height: 24rem;
-  bottom: -2rem;
+  bottom: -2.25rem;
 }
 
 @media screen and (max-width: 640px) {
