@@ -11,3 +11,6 @@ export { default as ChooseCoin } from "./choose-coin.png";
 export { default as EmptyCoin } from "./empty-coin.PNG";
 export { default as SpinningCoin } from "./spinning-coin.gif";
 export { default as MarioDraco } from "./mario-draco.jpeg";
+export * from "./Telegram";
+export * from "./Twitter";
+export * from "./HouseSolid";

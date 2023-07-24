@@ -1,7 +1,7 @@
 .header-container {
   align-items: center;
   display: flex;
-  margin: 2.5rem auto 0;
+  margin: 2.5rem auto;
   max-width: 122rem;
 }
 
@@ -15,6 +15,20 @@
   align-items: center;
   display: flex;
   flex: 1;
+}
+
+.header-button__container a {
+  text-decoration: underline;
+  color: var(--step-para-color);
+  margin: 0 1.4rem;
+  display: flex;
+  align-items: center;
+  text-decoration-color: var(--connect-wallet-hover-color);
+  font-size: 1.4rem;
+}
+
+.social-svg__link {
+  margin-right: 0.5rem;
 }
 
 .header-button__container [data-testid="rk-connect-button"] {
