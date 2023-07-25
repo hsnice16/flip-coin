@@ -9,13 +9,13 @@ import {
   getDefaultWallets,
 } from "@rainbow-me/rainbowkit";
 import { configureChains, createClient, WagmiConfig } from "wagmi";
-import { polygonMumbai, mainnet } from "wagmi/chains";
+import { mainnet } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
 const { chains, provider, webSocketProvider } = configureChains(
-  [mainnet, polygonMumbai],
+  [mainnet],
   [
     alchemyProvider({ apiKey: process.env.REACT_APP_ALCHEMY_API }),
     publicProvider(),
