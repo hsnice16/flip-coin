@@ -21,7 +21,6 @@ import {
   useGetRefundDelay,
   useGetRefundWrite,
   useGetPendingGameId,
-  useGetPendingNewFlip,
 } from "../../hooks";
 import { useAccount } from "wagmi";
 import { useMemo, useState, useEffect } from "react";
@@ -58,9 +57,9 @@ export function BetAmountCard({
 
   const { pause } = useCheckForPause();
   const refundDelay = useGetRefundDelay();
-  const gameId = useGetPendingGameId(setCheckingForPendingGameId);
-  const { data: pendingNewFlip, isSuccess: pendingNewFlipIsSuccess } =
-    useGetPendingNewFlip(gameId);
+  const { gameId, pendingNewFlip } = useGetPendingGameId(
+    setCheckingForPendingGameId
+  );
 
   const { approveWrite, approveWriteLoading, approveWriteSuccess } =
     useApproveWrite(
@@ -75,7 +74,7 @@ export function BetAmountCard({
     return Number((Number(enteredAmount) * 2).toFixed(0)).toLocaleString();
   }, [enteredAmount]);
   const formattedUserAmount = useMemo(() => {
-    return userMortyBalance
+    return userMortyBalance === undefined
       ? Number(
           (Number(formatEther(userMortyBalance)) * 2).toFixed(0)
         ).toLocaleString()
@@ -139,19 +138,19 @@ export function BetAmountCard({
   }, [gameId, checkingForPendingGameId]);
 
   useEffect(() => {
-    if (gameId && Number(gameId) !== 0 && pendingNewFlipIsSuccess) {
+    if (gameId && Number(gameId) !== 0 && pendingNewFlip) {
       setSelectedCoin(pendingNewFlip.isTail ? "tail" : "head");
       setNewFlip({
-        gameId: pendingNewFlip.gameId,
+        gameId: gameId,
         user: pendingNewFlip.user,
         isTail: pendingNewFlip.isTail,
-        amount: pendingNewFlip.amount,
+        amount: pendingNewFlip.userBet,
       });
-      setPendingBetTimestamp(pendingNewFlip.blockTimestamp);
+      setPendingBetTimestamp(pendingNewFlip.time);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [gameId, pendingNewFlipIsSuccess, pendingNewFlip]);
+  }, [gameId, pendingNewFlip]);
 
   useEffect(() => {
     const intervalId = setInterval(() => {

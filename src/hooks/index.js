@@ -4,7 +4,6 @@ export * from "./useUserMortyBalance";
 export * from "./useApproveWrite";
 export * from "./useFlipWrite";
 export * from "./useListenFlipCompletedEvent";
-export * from "./useAPIs";
 export * from "./useListenNewFlipEvent";
 export * from "./useCheckForPause";
 export * from "./useGetPendingGameId";
