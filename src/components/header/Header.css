@@ -12,9 +12,14 @@
 
 .header-button__container {
   justify-content: flex-end;
+  flex: 1;
+  position: relative;
+}
+
+.header-button__container,
+.header-button__container > div:first-child {
   align-items: center;
   display: flex;
-  flex: 1;
 }
 
 .header-button__container a {
@@ -50,4 +55,30 @@
 .header-button__container [data-testid="rk-connect-button"]:hover {
   background-color: var(--connect-wallet-hover-color);
   transform: scale(1);
+}
+
+@media screen and (max-width: 640px) {
+  .header-container {
+    margin-bottom: 8rem;
+  }
+
+  .header-container .logo {
+    width: 8rem;
+    height: 8rem;
+  }
+
+  .header-button__container > div:first-child {
+    position: absolute;
+    top: 100px;
+  }
+
+  .header-button__container a {
+    text-decoration: none;
+    border-bottom: thin solid var(--connect-wallet-hover-color);
+    padding-bottom: 0.25rem;
+  }
+
+  .header-button__container a > span {
+    display: none;
+  }
 }
