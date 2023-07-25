@@ -204,7 +204,7 @@
   gap: 0.5rem;
 }
 
-.profit-amount__container .profit-amount {
+.profit-amount {
   display: inline-block;
   max-width: 15rem;
   overflow-y: auto;

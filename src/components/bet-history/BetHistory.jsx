@@ -2,11 +2,8 @@ import "./BetHistory.css";
 import { sliceAddress, getTimeDurationToShow, formatEther } from "../../utils";
 import { EmptyHistory } from "../../images";
 import { useEffect, useState } from "react";
-import { useGetHistory } from "../../hooks";
 
-export function BetHistory() {
-  const { data, isLoading } = useGetHistory();
-
+export function BetHistory({ data, isLoading }) {
   return (
     <div className="bet-history__container">
       <h3>Bet History</h3>
@@ -26,8 +23,8 @@ export function BetHistory() {
           <tbody>
             {(data ?? []).length ? (
               data.map((entry) => {
-                const { transactionHash } = entry;
-                return <TableRow key={transactionHash} entry={entry} />;
+                const { gameId } = entry;
+                return <TableRow key={formatEther(gameId)} entry={entry} />;
               })
             ) : (
               <div className="empty-history__msg">
