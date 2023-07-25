@@ -5,7 +5,6 @@ import {
   isValidInputValue,
   formatEther,
   COIN,
-  MINIMUM_BET,
   NEW_FLIP_INITIAL_VALUE,
   FLIP_COMPLETED_INITIAL_VALUE,
 } from "../../utils";
@@ -19,6 +18,7 @@ import {
   useInvalidateBetHistory,
   useListenNewFlipEvent,
   useCheckForPause,
+  useMinBet,
   useGetRefundDelay,
   useGetRefundWrite,
   useGetPendingGameId,
@@ -45,6 +45,8 @@ export function BetAmountCard({ isTail, didWin, setDidWin, setSelectedCoin }) {
   const [pendingBetTimestamp, setPendingBetTimestamp] = useState(null);
 
   const maxBet = useMaxBet();
+  const minBet = useMinBet();
+  const MINIMUM_BET = minBet ? formatEther(minBet) : "...";
   const { address } = useAccount();
   const userMortyBalance = useUserMortyBalance();
   const invalidateBetHistory = useInvalidateBetHistory();
@@ -334,7 +336,8 @@ export function BetAmountCard({ isTail, didWin, setDidWin, setSelectedCoin }) {
           approveBtnText === "Waiting..." ||
           !address ||
           pause ||
-          (gameId && Number(gameId) !== 0)
+          (gameId && Number(gameId) !== 0) ||
+          !minBet
         }
       >
         {approveBtnText}

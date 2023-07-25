@@ -10,3 +10,4 @@ export * from "./useCheckForPause";
 export * from "./useGetPendingGameId";
 export * from "./useGetRefundDelay";
 export * from "./useGetRefundWrite";
+export * from "./useMinBet";
