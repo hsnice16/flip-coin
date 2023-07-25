@@ -298,7 +298,12 @@ export function BetAmountCard({ isTail, didWin, setDidWin, setSelectedCoin }) {
 
       <div className="amount-card__labels">
         <h2>{COIN} Bet</h2>
-        <h3>Min bet: 100 000 000 {COIN}</h3>
+        <h3>
+          Min bet:
+          <span>
+            {MINIMUM_BET} {COIN}
+          </span>
+        </h3>
         <label htmlFor="">Enter amount</label>
       </div>
 

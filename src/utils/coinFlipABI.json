@@ -214,7 +214,8 @@
       { "internalType": "bool", "name": "didWin", "type": "bool" },
       { "internalType": "bool", "name": "isTail", "type": "bool" },
       { "internalType": "uint256", "name": "amount", "type": "uint256" },
-      { "internalType": "uint256", "name": "gameId", "type": "uint256" }
+      { "internalType": "uint256", "name": "gameId", "type": "uint256" },
+      { "internalType": "uint256", "name": "timestamp", "type": "uint256" }
     ],
     "stateMutability": "view",
     "type": "function"
@@ -224,21 +225,6 @@
       { "internalType": "uint32", "name": "newLimit", "type": "uint32" }
     ],
     "name": "changeCallbackGasLimit",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "newPoolPercentage",
-        "type": "uint256"
-      },
-      { "internalType": "uint256", "name": "newMinBet", "type": "uint256" },
-      { "internalType": "uint256", "name": "newDelay", "type": "uint256" }
-    ],
-    "name": "changeSettings",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -277,7 +263,8 @@
           { "internalType": "bool", "name": "didWin", "type": "bool" },
           { "internalType": "bool", "name": "isTail", "type": "bool" },
           { "internalType": "uint256", "name": "amount", "type": "uint256" },
-          { "internalType": "uint256", "name": "gameId", "type": "uint256" }
+          { "internalType": "uint256", "name": "gameId", "type": "uint256" },
+          { "internalType": "uint256", "name": "timestamp", "type": "uint256" }
         ],
         "internalType": "struct DracoCoinFlip.FlipResult[]",
         "name": "",
@@ -390,6 +377,15 @@
   {
     "inputs": [{ "internalType": "bool", "name": "state", "type": "bool" }],
     "name": "setPause",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_delay", "type": "uint256" }
+    ],
+    "name": "setRefundDelay",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

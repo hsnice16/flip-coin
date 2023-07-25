@@ -49,7 +49,7 @@ export function BetHistory() {
 }
 
 function TableRow({ entry }) {
-  const { blockTimestamp, didWin, isTail, player, amount } = entry;
+  const { timestamp: blockTimestamp, didWin, isTail, player, amount } = entry;
 
   const formattedAmount = formatEther(amount);
   const wager = didWin

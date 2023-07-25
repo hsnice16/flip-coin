@@ -11,11 +11,15 @@ import {
 import { configureChains, createClient, WagmiConfig } from "wagmi";
 import { polygonMumbai, mainnet } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
+import { alchemyProvider } from "wagmi/providers/alchemy";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
 const { chains, provider, webSocketProvider } = configureChains(
   [mainnet, polygonMumbai],
-  [publicProvider()]
+  [
+    alchemyProvider({ apiKey: process.env.REACT_APP_ALCHEMY_API }),
+    publicProvider(),
+  ]
 );
 
 const { connectors } = getDefaultWallets({

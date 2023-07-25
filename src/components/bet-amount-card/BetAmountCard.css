@@ -120,6 +120,12 @@
   font-size: 1.5rem;
 }
 
+.amount-card__labels h3 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .amount-card__labels :is(h3, label),
 .profit-amount__container .bruh-text {
   color: var(--form-label-color);
