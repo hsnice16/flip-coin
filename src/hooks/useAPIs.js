@@ -1,9 +1,13 @@
 /* eslint-disable no-undef */
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import { Contract } from "ethers";
+import { COIN_FLIP_CONTRACT, coinFlipABI } from "../utils";
+import { useProvider } from "wagmi";
 
-const URL =
-  "https://api.studio.thegraph.com/query/39089/mortycoinflip-v1/v0.0.1";
+// const URL =
+//   "https://api.studio.thegraph.com/query/39089/mortycoinflip-v1/v0.0.1";
 
 export function useInvalidateBetHistory() {
   const queryClient = useQueryClient();
@@ -14,41 +18,66 @@ export function useInvalidateBetHistory() {
 }
 
 export function useGetHistory() {
-  return useQuery(["bet-history"], async () => {
-    const FLIP_COMPLETED_QUERY = `
-    {
-      flipCompleteds(
-        orderBy: blockTimestamp,
-        orderDirection: desc,
-        first: 20
-      ) {
-        id
-        player
-        didWin
-        isTail
-        amount
-        gameId
-        blockNumber
-        blockTimestamp
-        transactionHash
+  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState();
+  const provider = useProvider();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        setIsLoading(true);
+        const contract = new Contract(
+          COIN_FLIP_CONTRACT,
+          coinFlipABI,
+          provider
+        );
+        const _data = await contract.getLastFlipResults(20);
+        setData(_data);
+      } catch (error) {
+        console.log("contract-read-error-for-getLastFlipResults", error);
+      } finally {
+        setIsLoading(false);
       }
-    }
-    `;
+    })();
+  }, [provider]);
 
-    const {
-      data: {
-        data: { flipCompleteds },
-      },
-    } = await axios({
-      url: URL,
-      method: "POST",
-      data: {
-        query: FLIP_COMPLETED_QUERY,
-      },
-    });
+  return { data, isLoading };
 
-    return flipCompleteds;
-  });
+  // return useQuery(["bet-history"], async () => {
+  //   const FLIP_COMPLETED_QUERY = `
+  //   {
+  //     flipCompleteds(
+  //       orderBy: blockTimestamp,
+  //       orderDirection: desc,
+  //       first: 20
+  //     ) {
+  //       id
+  //       player
+  //       didWin
+  //       isTail
+  //       amount
+  //       gameId
+  //       blockNumber
+  //       blockTimestamp
+  //       transactionHash
+  //     }
+  //   }
+  //   `;
+
+  //   const {
+  //     data: {
+  //       data: { flipCompleteds },
+  //     },
+  //   } = await axios({
+  //     url: URL,
+  //     method: "POST",
+  //     data: {
+  //       query: FLIP_COMPLETED_QUERY,
+  //     },
+  //   });
+
+  //   return flipCompleteds;
+  // });
 }
 
 export function useGetPendingNewFlip(gameId) {
