@@ -74,7 +74,7 @@ export function BetAmountCard({
     return Number((Number(enteredAmount) * 2).toFixed(0)).toLocaleString();
   }, [enteredAmount]);
   const formattedUserAmount = useMemo(() => {
-    return userMortyBalance === undefined
+    return userMortyBalance !== undefined
       ? Number(
           (Number(formatEther(userMortyBalance)) * 2).toFixed(0)
         ).toLocaleString()
