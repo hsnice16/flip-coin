@@ -1,3 +1,17 @@
+.header-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+}
+
+.header-banner > a {
+  color: var(--step-para-color);
+  text-decoration-color: var(--connect-wallet-hover-color);
+}
+
 .header-container {
   align-items: center;
   display: flex;
