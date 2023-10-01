@@ -63,7 +63,7 @@ export function BetAmountCard({
 
   const { approveWrite, approveWriteLoading, approveWriteSuccess } =
     useApproveWrite(
-      (Number(enteredAmount) - Number(formatEther(allowance))) * 10 ** 18
+      (Number(enteredAmount) - Number(formatEther(allowance))) * 10 ** 9
     );
 
   const { getRefundWrite, getRefundWriteLoading, getRefundWriteSuccess } =
