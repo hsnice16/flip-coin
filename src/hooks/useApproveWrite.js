@@ -23,7 +23,7 @@ export function useApproveWrite(amount) {
       const contract = new Contract(ERC_20_CONTRACT, erc20ABI, signer);
       const tx = await contract.approve(
         COIN_FLIP_CONTRACT,
-        utils.parseEther(amount)
+        utils.parseUnits(amount, 9)
       );
       await tx.wait();
 
