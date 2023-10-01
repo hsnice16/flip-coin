@@ -26,9 +26,7 @@ export function useMinBet() {
             coinFlipABI,
             provider
           );
-          console.log("coming...");
           const data = await contract.minBet();
-          console.log("data", data);
 
           setStates((prevValue) => ({ ...prevValue, isSuccess: true, data }));
         } catch (error) {
