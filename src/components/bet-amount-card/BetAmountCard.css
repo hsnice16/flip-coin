@@ -100,7 +100,7 @@
 .amount-card__labels {
   display: flex;
   flex-direction: column;
-  gap: 3.25rem;
+  gap: 2.25rem;
 }
 
 .amount-card__labels :is(h2, h3, label) {
@@ -111,6 +111,12 @@
 
 .amount-card__labels h2 {
   color: var(--primary-fill-color);
+}
+
+.amount-card__labels h3 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .amount-card__labels :is(h3, label),
@@ -188,10 +194,9 @@
   gap: 0.5rem;
 }
 
-.profit-amount__container .profit-amount {
+.profit-amount {
   display: inline-block;
   max-width: 20rem;
-  overflow: hidden;
 }
 
 .error-text {

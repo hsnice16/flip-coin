@@ -1,5 +1,32 @@
 [
-  { "inputs": [], "stateMutability": "nonpayable", "type": "constructor" },
+  {
+    "inputs": [
+      { "internalType": "string", "name": "name_", "type": "string" },
+      { "internalType": "string", "name": "symbol_", "type": "string" },
+      { "internalType": "uint256", "name": "totalSupply_", "type": "uint256" },
+      { "internalType": "address", "name": "router_", "type": "address" },
+      {
+        "internalType": "address",
+        "name": "charityAddress_",
+        "type": "address"
+      },
+      { "internalType": "uint16", "name": "taxFeeBps_", "type": "uint16" },
+      {
+        "internalType": "uint16",
+        "name": "liquidityFeeBps_",
+        "type": "uint16"
+      },
+      { "internalType": "uint16", "name": "charityFeeBps_", "type": "uint16" },
+      {
+        "internalType": "address",
+        "name": "serviceFeeReceiver_",
+        "type": "address"
+      },
+      { "internalType": "uint256", "name": "serviceFee_", "type": "uint256" }
+    ],
+    "stateMutability": "payable",
+    "type": "constructor"
+  },
   {
     "anonymous": false,
     "inputs": [
@@ -29,6 +56,19 @@
     "anonymous": false,
     "inputs": [
       {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "minTokensBeforeSwap",
+        "type": "uint256"
+      }
+    ],
+    "name": "MinTokensBeforeSwapUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
         "indexed": true,
         "internalType": "address",
         "name": "previousOwner",
@@ -42,6 +82,75 @@
       }
     ],
     "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "tokensSwapped",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "ethReceived",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "tokensIntoLiqudity",
+        "type": "uint256"
+      }
+    ],
+    "name": "SwapAndLiquify",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "SwapAndLiquifyAmountUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum TokenType",
+        "name": "tokenType",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "version",
+        "type": "uint256"
+      }
+    ],
+    "name": "TokenCreated",
     "type": "event"
   },
   {
@@ -68,6 +177,48 @@
     ],
     "name": "Transfer",
     "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "MAX_FEE",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "VERSION",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "_charityAddress",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "_charityFee",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "_liquidityFee",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "_taxFee",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
     "inputs": [
@@ -121,6 +272,42 @@
   },
   {
     "inputs": [
+      { "internalType": "uint256", "name": "tAmount", "type": "uint256" }
+    ],
+    "name": "deliver",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "account", "type": "address" }
+    ],
+    "name": "excludeFromFee",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "account", "type": "address" }
+    ],
+    "name": "excludeFromReward",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "account", "type": "address" }
+    ],
+    "name": "includeInReward",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
       { "internalType": "address", "name": "spender", "type": "address" },
       { "internalType": "uint256", "name": "addedValue", "type": "uint256" }
     ],
@@ -131,11 +318,20 @@
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "amount", "type": "uint256" }
+      { "internalType": "address", "name": "account", "type": "address" }
     ],
-    "name": "mint",
-    "outputs": [],
-    "stateMutability": "nonpayable",
+    "name": "isExcludedFromFee",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "account", "type": "address" }
+    ],
+    "name": "isExcludedFromReward",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -153,6 +349,16 @@
     "type": "function"
   },
   {
+    "inputs": [
+      { "internalType": "uint256", "name": "tAmount", "type": "uint256" },
+      { "internalType": "bool", "name": "deductTransferFee", "type": "bool" }
+    ],
+    "name": "reflectionFromToken",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "renounceOwnership",
     "outputs": [],
@@ -160,9 +366,72 @@
     "type": "function"
   },
   {
+    "inputs": [
+      { "internalType": "uint256", "name": "charityFeeBps", "type": "uint256" }
+    ],
+    "name": "setCharityFeePercent",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "liquidityFeeBps",
+        "type": "uint256"
+      }
+    ],
+    "name": "setLiquidityFeePercent",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_amount", "type": "uint256" }
+    ],
+    "name": "setSwapBackSettings",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "taxFeeBps", "type": "uint256" }
+    ],
+    "name": "setTaxFeePercent",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "swapAndLiquifyEnabled",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "symbol",
     "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "rAmount", "type": "uint256" }
+    ],
+    "name": "tokenFromReflection",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "totalFees",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -175,7 +444,7 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "to", "type": "address" },
+      { "internalType": "address", "name": "recipient", "type": "address" },
       { "internalType": "uint256", "name": "amount", "type": "uint256" }
     ],
     "name": "transfer",
@@ -185,8 +454,8 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "from", "type": "address" },
-      { "internalType": "address", "name": "to", "type": "address" },
+      { "internalType": "address", "name": "sender", "type": "address" },
+      { "internalType": "address", "name": "recipient", "type": "address" },
       { "internalType": "uint256", "name": "amount", "type": "uint256" }
     ],
     "name": "transferFrom",
@@ -202,5 +471,26 @@
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
-  }
+  },
+  {
+    "inputs": [],
+    "name": "uniswapV2Pair",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "uniswapV2Router",
+    "outputs": [
+      {
+        "internalType": "contract IUniswapV2Router02",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  { "stateMutability": "payable", "type": "receive" }
 ]

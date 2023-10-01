@@ -2,7 +2,13 @@
   {
     "inputs": [
       { "internalType": "uint64", "name": "subscriptionId", "type": "uint64" },
-      { "internalType": "address", "name": "_token", "type": "address" }
+      { "internalType": "address", "name": "_token", "type": "address" },
+      { "internalType": "uint256", "name": "_minBet", "type": "uint256" },
+      {
+        "internalType": "uint256",
+        "name": "_MaxRewardPoolPercentage",
+        "type": "uint256"
+      }
     ],
     "stateMutability": "nonpayable",
     "type": "constructor"
@@ -160,31 +166,6 @@
     "type": "event"
   },
   {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "newDenominator",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "newMinBet",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "newDelay",
-        "type": "uint256"
-      }
-    ],
-    "name": "SettingsUpdated",
-    "type": "event"
-  },
-  {
     "inputs": [
       { "internalType": "uint256", "name": "amount", "type": "uint256" }
     ],
@@ -201,25 +182,24 @@
     "type": "function"
   },
   {
-    "inputs": [
-      { "internalType": "uint32", "name": "newLimit", "type": "uint32" }
+    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "name": "allFlipResults",
+    "outputs": [
+      { "internalType": "address", "name": "player", "type": "address" },
+      { "internalType": "bool", "name": "didWin", "type": "bool" },
+      { "internalType": "bool", "name": "isTail", "type": "bool" },
+      { "internalType": "uint256", "name": "amount", "type": "uint256" },
+      { "internalType": "uint256", "name": "gameId", "type": "uint256" },
+      { "internalType": "uint256", "name": "timestamp", "type": "uint256" }
     ],
-    "name": "changeCallbackGasLimit",
-    "outputs": [],
-    "stateMutability": "nonpayable",
+    "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "newDenominator",
-        "type": "uint256"
-      },
-      { "internalType": "uint256", "name": "newMinBet", "type": "uint256" },
-      { "internalType": "uint256", "name": "newDelay", "type": "uint256" }
+      { "internalType": "uint32", "name": "newLimit", "type": "uint32" }
     ],
-    "name": "changeSettings",
+    "name": "changeCallbackGasLimit",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -247,10 +227,40 @@
     "type": "function"
   },
   {
+    "inputs": [
+      { "internalType": "uint256", "name": "_count", "type": "uint256" }
+    ],
+    "name": "getLastFlipResults",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "address", "name": "player", "type": "address" },
+          { "internalType": "bool", "name": "didWin", "type": "bool" },
+          { "internalType": "bool", "name": "isTail", "type": "bool" },
+          { "internalType": "uint256", "name": "amount", "type": "uint256" },
+          { "internalType": "uint256", "name": "gameId", "type": "uint256" },
+          { "internalType": "uint256", "name": "timestamp", "type": "uint256" }
+        ],
+        "internalType": "struct MortyCoinFlipV2.FlipResult[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "getRefund",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "lostAmount",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -311,6 +321,13 @@
   },
   {
     "inputs": [],
+    "name": "resetLostAmount",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "rewardPool",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
@@ -318,14 +335,63 @@
   },
   {
     "inputs": [],
-    "name": "rewardPoolDenominator",
+    "name": "rewardPoolPercentage",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
+    "inputs": [
+      { "internalType": "bytes32", "name": "_keyHash", "type": "bytes32" }
+    ],
+    "name": "setKeyHash",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_minBet", "type": "uint256" }
+    ],
+    "name": "setMinBet",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [{ "internalType": "bool", "name": "state", "type": "bool" }],
     "name": "setPause",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_delay", "type": "uint256" }
+    ],
+    "name": "setRefundDelay",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_maxRewardPoolPercentage",
+        "type": "uint256"
+      }
+    ],
+    "name": "setRewardPoolPercentage",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_token", "type": "address" }
+    ],
+    "name": "setTokenAddress",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

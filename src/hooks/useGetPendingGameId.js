@@ -7,24 +7,29 @@ export function useGetPendingGameId(setCheckingForPendingGameId) {
   const provider = useProvider();
   const { address } = useAccount();
 
-  const [states, setStates] = useState({ isSuccess: false, data: "" });
-  const { isSuccess, data } = states;
+  const [data, setData] = useState({});
 
   useEffect(() => {
     if (address && provider) {
       (async () => {
         try {
           setCheckingForPendingGameId(true);
-          setStates((prevValue) => ({ ...prevValue, isSuccess: false }));
-
           const contract = new Contract(
             COIN_FLIP_CONTRACT,
             coinFlipABI,
             provider
           );
-          const data = await contract.addressToFlip(address);
+          const gameId = await contract.addressToFlip(address);
 
-          setStates((prevValue) => ({ ...prevValue, isSuccess: true, data }));
+          let pendingNewFlip;
+          if (Number(gameId) !== 0) {
+            pendingNewFlip = await contract.flipToAddress(gameId);
+          }
+
+          setData({
+            gameId,
+            pendingNewFlip,
+          });
         } catch (error) {
           console.log("contract-read-error-for-addressToFlip", error);
         }
@@ -34,5 +39,5 @@ export function useGetPendingGameId(setCheckingForPendingGameId) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [address, provider]);
 
-  return isSuccess ? data : undefined;
+  return data;
 }

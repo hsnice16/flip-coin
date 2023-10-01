@@ -5,7 +5,6 @@ import {
   isValidInputValue,
   formatEther,
   COIN,
-  MINIMUM_BET,
   NEW_FLIP_INITIAL_VALUE,
   FLIP_COMPLETED_INITIAL_VALUE,
 } from "../../utils";
@@ -16,18 +15,23 @@ import {
   useFlipWrite,
   useApproveWrite,
   useListenFlipCompletedEvent,
-  useInvalidateBetHistory,
   useListenNewFlipEvent,
   useCheckForPause,
+  useMinBet,
   useGetRefundDelay,
   useGetRefundWrite,
   useGetPendingGameId,
-  useGetPendingNewFlip,
 } from "../../hooks";
 import { useAccount } from "wagmi";
 import { useMemo, useState, useEffect } from "react";
 
-export function BetAmountCard({ isTail, didWin, setDidWin, setSelectedCoin }) {
+export function BetAmountCard({
+  isTail,
+  didWin,
+  setDidWin,
+  setSelectedCoin,
+  refetch,
+}) {
   const [error, setError] = useState("");
   const [showBetText, setShowBetText] = useState(false);
   const [enteredAmount, setEnteredAmount] = useState("");
@@ -45,16 +49,17 @@ export function BetAmountCard({ isTail, didWin, setDidWin, setSelectedCoin }) {
   const [pendingBetTimestamp, setPendingBetTimestamp] = useState(null);
 
   const maxBet = useMaxBet();
+  const minBet = useMinBet();
+  const MINIMUM_BET = minBet ? formatEther(minBet) : "...";
   const { address } = useAccount();
   const userMortyBalance = useUserMortyBalance();
-  const invalidateBetHistory = useInvalidateBetHistory();
   const { allowance, isLoadingAllowance } = useAllowance();
 
   const { pause } = useCheckForPause();
   const refundDelay = useGetRefundDelay();
-  const gameId = useGetPendingGameId(setCheckingForPendingGameId);
-  const { data: pendingNewFlip, isSuccess: pendingNewFlipIsSuccess } =
-    useGetPendingNewFlip(gameId);
+  const { gameId, pendingNewFlip } = useGetPendingGameId(
+    setCheckingForPendingGameId
+  );
 
   const { approveWrite, approveWriteLoading, approveWriteSuccess } =
     useApproveWrite(
@@ -68,6 +73,13 @@ export function BetAmountCard({ isTail, didWin, setDidWin, setSelectedCoin }) {
   const formattedProfitAmount = useMemo(() => {
     return Number((Number(enteredAmount) * 2).toFixed(0)).toLocaleString();
   }, [enteredAmount]);
+  const formattedUserAmount = useMemo(() => {
+    return userMortyBalance !== undefined
+      ? Number(
+          Number(formatEther(userMortyBalance)).toFixed(0)
+        ).toLocaleString()
+      : "...";
+  }, [userMortyBalance]);
 
   const approveBtnText = useMemo(() => {
     if (listeningEvents || isLastBetStillPending) return "Checking...";
@@ -108,11 +120,11 @@ export function BetAmountCard({ isTail, didWin, setDidWin, setSelectedCoin }) {
     if (newFlip.gameId && flipCompleted.gameId) {
       if (Number(newFlip.gameId) === Number(flipCompleted.gameId)) {
         setDidWin(flipCompleted.didWin);
-        invalidateBetHistory();
         setListeningEvents(false);
         setPendingBetTimestamp(null);
         setIsLastBetStillPending(false);
         setCheckingForPendingGameId(false);
+        refetch();
       }
     }
 
@@ -126,19 +138,19 @@ export function BetAmountCard({ isTail, didWin, setDidWin, setSelectedCoin }) {
   }, [gameId, checkingForPendingGameId]);
 
   useEffect(() => {
-    if (gameId && Number(gameId) !== 0 && pendingNewFlipIsSuccess) {
+    if (gameId && Number(gameId) !== 0 && pendingNewFlip) {
       setSelectedCoin(pendingNewFlip.isTail ? "tail" : "head");
       setNewFlip({
-        gameId: pendingNewFlip.gameId,
+        gameId: gameId,
         user: pendingNewFlip.user,
         isTail: pendingNewFlip.isTail,
-        amount: pendingNewFlip.amount,
+        amount: pendingNewFlip.userBet,
       });
-      setPendingBetTimestamp(pendingNewFlip.blockTimestamp);
+      setPendingBetTimestamp(pendingNewFlip.time);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [gameId, pendingNewFlipIsSuccess, pendingNewFlip]);
+  }, [gameId, pendingNewFlip]);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -298,7 +310,18 @@ export function BetAmountCard({ isTail, didWin, setDidWin, setSelectedCoin }) {
 
       <div className="amount-card__labels">
         <h2>{COIN} Bet</h2>
-        <h3>Min bet: 100 000 000 {COIN}</h3>
+        <h3>
+          Balance:
+          <span>
+            <span className="profit-amount">{formattedUserAmount}</span> {COIN}
+          </span>
+        </h3>
+        <h3>
+          Min bet:
+          <span>
+            <span className="profit-amount">{MINIMUM_BET}</span> {COIN}
+          </span>
+        </h3>
         <label htmlFor="">Enter amount</label>
       </div>
 
@@ -329,7 +352,8 @@ export function BetAmountCard({ isTail, didWin, setDidWin, setSelectedCoin }) {
           approveBtnText === "Waiting..." ||
           !address ||
           pause ||
-          (gameId && Number(gameId) !== 0)
+          (gameId && Number(gameId) !== 0) ||
+          !minBet
         }
       >
         {approveBtnText}
