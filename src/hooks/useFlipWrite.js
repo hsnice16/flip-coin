@@ -21,7 +21,7 @@ export function useFlipWrite() {
       }));
 
       const contract = new Contract(COIN_FLIP_CONTRACT, coinFlipABI, signer);
-      const tx = await contract.flip(utils.parseEther(amount), isTail);
+      const tx = await contract.flip(utils.parseUnits(amount, 9), isTail);
       await tx.wait();
 
       setStates((prevValue) => ({
