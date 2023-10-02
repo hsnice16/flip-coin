@@ -8,7 +8,13 @@
         "internalType": "uint256",
         "name": "_MaxRewardPoolPercentage",
         "type": "uint256"
-      }
+      },
+      {
+        "internalType": "uint256",
+        "name": "_feePercentage",
+        "type": "uint256"
+      },
+      { "internalType": "address", "name": "_feeWallet", "type": "address" }
     ],
     "stateMutability": "nonpayable",
     "type": "constructor"
@@ -205,6 +211,20 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "feePercentage",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "feeWallet",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       { "internalType": "uint256", "name": "userBet", "type": "uint256" },
       { "internalType": "bool", "name": "isTail", "type": "bool" }
@@ -338,6 +358,24 @@
     "name": "rewardPoolPercentage",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_feePercentage", "type": "uint256" }
+    ],
+    "name": "setFeePercentage",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_feeWallet", "type": "address" }
+    ],
+    "name": "setFeeWallet",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
